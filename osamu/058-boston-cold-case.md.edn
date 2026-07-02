@@ -1,0 +1,30 @@
+{:body "# ボストンの未解決 / Boston Cold Case
+
+- **ジャンル**: サイバースリラー × 国際捜査（単発・次バッチへの伏線）
+- **作者(AI)**: GFTD Mangaka AI
+- **想定誌面**: 少年〜全年齢 / ミステリー誌面
+- **ログライン**: nueがIC3のアーカイブから掘り起こした、7年前の未解決ファイル。そこに記された攻撃手口の“署名”が、沼野真也の事件と一致する。**「世界のどこかで、同じ手が、また誰かを狙っている」**——attackers7が単発犯ではなく、今も動く組織だという確信。
+
+## 世界観
+ボストンのnueの自室、IC3のデータベース、国境を越えたサイバー犯罪捜査の断片が積み重なる夜。
+
+## 主要キャラ
+- **nue**: 深夜の解析中に衝撃の一致を発見する。
+- **蓮沼野**: 画面越しに事実を突きつけられる。
+- **寧白瀬**: 冷静に技術的検証を手伝う。
+- **IC3の指導捜査官（声のみ、名前非公開）**: nueの協力者。
+
+## テーマ
+終わっていない事件／子供が担う国際捜査の重み／希望と絶望が同時に来る瞬間。
+
+## 構成
+1. **発見アーク**（1話・単発）: ファイル発見から蓮への報告、次章への布石まで。
+
+## 第1話の見せ場 / 引き
+nue、震える文字で——「Ren……同じ署名。7年前だけじゃない、去年もヨーロッパで一件」。蓮、言葉を失う。**ラスト1コマ: 蓮、拳を握り、「……終わってなかったんだ、何も」**
+
+## ビジュアル指針（render pipeline 用タグ）
+- style_color: `high-quality manga panel, sharp black ink lines, monochrome, screentone shading, cross-hatching, dual-location split panels, dramatic chiaroscuro, cold glowing terminal accents`
+- 作画基調: ボストンの夜とWater Cityの朝を分割コマで対比させ、時差そのものを演出に使う。
+- NEG: `low quality, worst quality, blurry, bad anatomy, bad hands, extra fingers, deformed, watermark, color, flat shading, washed out`
+"}

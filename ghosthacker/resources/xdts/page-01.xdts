@@ -1,0 +1,143 @@
+{
+  "fileType": "xdts",
+  "fileVersion": "1.0",
+  "fileRevision": "1",
+  "metaData": {
+    "title": "ghost hacker arc 0-1 page 1",
+    "fps": 24,
+    "frameCount": 600,
+    "timeTableHeaderTextList": [
+      "Panel",
+      "Shot",
+      "Image",
+      "Dialogue",
+      "Characters"
+    ]
+  },
+  "timeTables": [
+    {
+      "timeTableId": 1,
+      "fields": [
+        {
+          "fieldId": "Panel",
+          "fieldType": "TEXT"
+        },
+        {
+          "fieldId": "Shot",
+          "fieldType": "TEXT"
+        },
+        {
+          "fieldId": "Image",
+          "fieldType": "IMAGE_REFERENCE"
+        },
+        {
+          "fieldId": "Dialogue",
+          "fieldType": "TEXT"
+        },
+        {
+          "fieldId": "Characters",
+          "fieldType": "TEXT"
+        }
+      ],
+      "frames": [
+        {
+          "frameNumber": 1,
+          "frameCount": 84,
+          "panelIndex": 1,
+          "shot": "Wide",
+          "tone": "quiet",
+          "sceneSubject": "Nei enters the classroom",
+          "imageReference": "/tmp/v5-stylized-pg01-p01-bw.png",
+          "dialogue": "廊下から、隣のD組の白瀬寧が、コメッコンのドーナツ袋を片手に、ずかずかと入ってきた。",
+          "characters": [
+            "Nei"
+          ]
+        },
+        {
+          "frameNumber": 85,
+          "frameCount": 84,
+          "panelIndex": 2,
+          "shot": "Medium",
+          "tone": "comedic",
+          "sceneSubject": "Nei tries to wake Ren",
+          "imageReference": "/tmp/v5-stylized-pg01-p02-bw.png",
+          "dialogue": "レン / ……",
+          "characters": [
+            "Ren"
+          ]
+        },
+        {
+          "frameNumber": 169,
+          "frameCount": 60,
+          "panelIndex": 3,
+          "shot": "Close Up",
+          "tone": "comedic",
+          "sceneSubject": "Nei threatens to eat the donuts",
+          "imageReference": "/tmp/v5-stylized-pg01-p03-bw.png",
+          "dialogue": "起きないと、コメッコンの米粉ドーナツ、わたしが、全部 食べるよ",
+          "characters": [
+            "Nei"
+          ]
+        },
+        {
+          "frameNumber": 229,
+          "frameCount": 84,
+          "panelIndex": 4,
+          "shot": "Medium",
+          "tone": "comedic",
+          "sceneSubject": "Nei eats the donut",
+          "imageReference": "/tmp/v5-stylized-pg01-p04-bw.png",
+          "dialogue": "Neiはおもむろに蓮の米粉ドーナツを食べ始めた。 / それ俺の・・・なんだけど",
+          "characters": [
+            "Nei"
+          ]
+        },
+        {
+          "frameNumber": 313,
+          "frameCount": 84,
+          "panelIndex": 5,
+          "shot": "Medium",
+          "tone": "comedic",
+          "sceneSubject": "Nei gives advice",
+          "imageReference": "/tmp/v5-stylized-pg01-p05-bw.png",
+          "dialogue": "ちゃんと起きてお昼食べなよ / 怠惰がおれの美徳なんだよ...",
+          "characters": [
+            "Nei"
+          ]
+        },
+        {
+          "frameNumber": 397,
+          "frameCount": 72,
+          "panelIndex": 6,
+          "shot": "Over the Shoulder",
+          "tone": "contemplative",
+          "sceneSubject": "Yuto's perspective",
+          "imageReference": "/tmp/v5-stylized-pg01-p06-bw.png",
+          "dialogue": "沼野くん、今日も寝てた。いつも、隣のクラスの白瀬さんが、起こしに来る。授業は聞いてないのに、テストはいつも上位にいる。変な奴、だ。",
+          "characters": [
+            "Yuto"
+          ]
+        },
+        {
+          "frameNumber": 469,
+          "frameCount": 132,
+          "panelIndex": 7,
+          "shot": "Wide",
+          "tone": "triumph",
+          "sceneSubject": "Sneaker reveal",
+          "imageReference": "/tmp/v5-stylized-pg01-p07-bw.png",
+          "dialogue": "見てくれ。ついに、限定モデル / うわっ、即完売のやつ！",
+          "characters": [
+            "Akira"
+          ]
+        }
+      ]
+    }
+  ],
+  "_gftd_metadata": {
+    "source": "mangaka v5+ pipeline",
+    "page_num": 1,
+    "scene_slug": null,
+    "manifest_panel_count": 7
+  }
+}

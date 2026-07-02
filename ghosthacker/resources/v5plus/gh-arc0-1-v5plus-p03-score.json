@@ -1,0 +1,65 @@
+{
+  "scores": {
+    "character_visible": 7.7,
+    "scene_continuity": 9.5,
+    "panel_diversity": 6.6,
+    "inking_quality": 6.6,
+    "composition_bimodal": 10,
+    "background_white": 5.9,
+    "bubble_legibility": 10.0,
+    "emotional_impact": 8.4,
+    "artifact_freedom": 10.0,
+    "brightness_avg": 5.7,
+    "silhouette_clarity": 10,
+    "panel_coherence": 6.1,
+    "wasted_lines": 1.0,
+    "manifest_qa_total": 71.5,
+    "manifest_window_check": 7.0,
+    "manifest_character_presence": 6.0,
+    "manifest_character_identity": 8.0,
+    "manifest_spatial_layout": 7.0,
+    "manifest_scene_match": 7.0,
+    "manifest_action_match": 8.0,
+    "jump_qa_total": 84.6,
+    "jump_character_anatomy": 9.0,
+    "jump_multi_character_quality": 8.0,
+    "jump_background_detail": 7.0,
+    "jump_composition_pose": 9.0,
+    "jump_bubble_integration": 8.0,
+    "jump_manga_authenticity": 9.0,
+    "jump_sfx_text": 9.0,
+    "jump_environment_detail": 8.0
+  },
+  "total": 75.8,
+  "jump_tier_label": "mid-tier (人気作)",
+  "heuristic_total": 70.2,
+  "jump_qa": {
+    "total": 84.6,
+    "label": "top-tier (Jump 看板作)",
+    "verdict": "This page demonstrates a high level of technical skill, approaching Death Note quality in many areas.",
+    "issues": [
+      "The background detail, while good, could benefit from even finer textural rendering to match the photographic realism of Death Note.",
+      "While the character anatomy is excellent, a slight increase in the dynamism of poses could elevate the composition further."
+    ],
+    "model": "gemma3:4b",
+    "elapsed_s": 74.1,
+    "n_samples": 5
+  },
+  "issues": [
+    "background gray-midtone (bg_mean=89, paper should be ≥240)",
+    "[Manifest] panel 1: the window shows a blurred sky, but lacks detail and appears somewhat unnatural.",
+    "[Manifest] panel 3: the classroom appears somewhat empty across all panels, with only Nei and Ren visible.",
+    "[Manifest] panel 6: the window shows a blurred sky, but lacks detail and appears somewhat unnatural.",
+    "[Manifest] panel 7: the window shows a blurred sky, but lacks detail and appears somewhat unnatural.",
+    "[Jump] The background detail, while good, could benefit from even finer textural rendering to match the photographic realism of Death Note.",
+    "[Jump] While the character anatomy is excellent, a slight increase in the dynamism of poses could elevate the composition further."
+  ],
+  "improvement_hints": [
+    "Blender: set single_color=(1,1,1) + film transparent off + world background white"
+  ],
+  "_diagnostics": {
+    "bg_mean": 89.0,
+    "edge_ratio": 0.228,
+    "saturation": 0.0
+  }
+}

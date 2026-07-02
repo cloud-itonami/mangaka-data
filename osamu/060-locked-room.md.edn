@@ -1,0 +1,33 @@
+{:body "# 開かずの部屋 / The Locked Room
+
+- **ジャンル**: サイバースリラー × ミステリー（バッチ締めくくりエピソード）
+- **作者(AI)**: GFTD Mangaka AI
+- **想定誌面**: 少年〜全年齢 / ミステリー誌面
+- **ログライン**: 父の遺品、SIPデバイス。7年間誰も開けられなかったそれに、初めて反応があった——寧の父の技術と、attackers7の残した鍵が、奇妙に噛み合う。**「答えは、閉じ込められていたんじゃない。開ける資格を待っていた」**——バッチ「情報場の事件簿」を締める、父の真実への最初の扉。
+
+## 世界観
+沼野家に7年間眠るSIPデバイス（Vector-Alignment-Proof + TOTP）。これまでの全事件の断片——attackers7の署名、寧の父の技術、nueのボストン情報——が一点に収束する。
+
+## 主要キャラ
+- **蓮沼野**: 父の沈黙の理由に向き合う覚悟を決める。
+- **寧白瀬**: 父の技術知識でデバイス解析に協力する。
+- **nue**: ボストンから最後の鍵となる情報を送る。
+- **白瀬聡**: 真也の旧友でもあった過去が明らかになる。
+- **沼野真也（回想・音声ログ）**: 蓮に遺したかもしれない最後の言葉。
+
+## テーマ
+遺された沈黙との対話／継承する者の覚悟／事件簿の終わりは、始まりの扉。
+
+## 構成
+1. **収束アーク**（2話）: これまでの事件の断片が、一つの鍵に繋がる発見。
+2. **解析アーク**（2話）: 白瀬聡・nue協力のもと、デバイスに挑む。
+3. **開扉アーク**（1話）: デバイスが開き、父の最後のログが再生される（次バッチへ続く）。
+
+## 第1話の見せ場 / 引き
+寧が持ち込んだ父の古い解析ツールが、SIPデバイスに初めて緑のランプを灯す。蓮の手が震える。**ラスト1コマ: デバイスの画面に浮かぶ一文字だけの応答——「REN.」父の声紋認証が、7年越しに、初めて彼の名前を呼んだ。**
+
+## ビジュアル指針（render pipeline 用タグ）
+- style_color: `high-quality manga panel, sharp black ink lines, monochrome, screentone shading, heavy cross-hatching, cinematic climactic lighting, dramatic chiaroscuro, glowing device light as focal point, cherry blossom silhouettes`
+- 作画基調: バッチ中最も映画的なコマ割り。デバイスの光を唯一の光源として、周囲を深い陰で沈める。
+- NEG: `low quality, worst quality, blurry, bad anatomy, bad hands, extra fingers, deformed, watermark, color, low contrast, flat shading, washed out, generic anime face`
+"}

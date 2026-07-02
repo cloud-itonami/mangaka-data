@@ -1,0 +1,566 @@
+{
+  "characters": {
+    "Yuto": {
+      "id": "yuto",
+      "asset_type": "character",
+      "text_desc": "17 year old Japanese teen male with dark messy black hair, anxious expression, slim build, white short-sleeve school uniform shirt with crest, navy slacks of 3-B class, casual home wear is loose dark hoodie and grey sweatpants. Smartphone-addicted, prone to online impulse buying. Lives at home with mother.",
+      "embedding": null,
+      "metadata": {},
+      "name": "Yuto Numano",
+      "age": 17,
+      "height_cm": 170,
+      "gender": "male",
+      "hair_color": "dark messy black",
+      "eye_color": "dark brown",
+      "skin_tone": "fair",
+      "uniform": "white short-sleeve shirt with school crest + navy slacks + black loafers",
+      "home_outfit": "loose dark hoodie + grey sweatpants + house slippers",
+      "personality": "anxious, smartphone-addicted, prone to impulse decisions",
+      "catchphrase": "...おれ、買っただけ、なのに、",
+      "lora_path": null,
+      "face_ref_image": null,
+      "preferred_bubble_id": "speech_oval",
+      "home_scene_id": "yuto-bedroom",
+      "relationships": {
+        "Akira": "classmate",
+        "Nei": "classmate",
+        "Ren": "classmate",
+        "Saki": "classmate"
+      }
+    },
+    "Ren": {
+      "id": "ren",
+      "asset_type": "character",
+      "text_desc": "17 year old Japanese teen male hacker, dark hair half-covered with hoodie, sleepy droopy eyes, perpetually exhausted from late-night coding. Wears casual oversized black hoodie when not in school uniform. Has multi-monitor hacker den room.",
+      "embedding": null,
+      "metadata": {},
+      "name": "Ren Fujisaki",
+      "age": 17,
+      "height_cm": 175,
+      "gender": "male",
+      "hair_color": "dark, often messy",
+      "eye_color": "dark brown",
+      "skin_tone": "pale (indoor)",
+      "uniform": "white shirt + navy slacks + open jacket",
+      "home_outfit": "oversized black t-shirt + cargo shorts",
+      "personality": "sleepy, hacker-prodigy, indifferent surface masks sharp intellect",
+      "catchphrase": null,
+      "lora_path": null,
+      "face_ref_image": null,
+      "preferred_bubble_id": "speech_oval",
+      "home_scene_id": "rens-room",
+      "relationships": {
+        "Nei": "best friend",
+        "Yuto": "classmate"
+      }
+    },
+    "Nei": {
+      "id": "nei",
+      "asset_type": "character",
+      "text_desc": "16 year old Japanese teen girl with long platinum blonde hair, calm gentle perceptive expression, navy sailor blouse uniform with red ribbon tie and pleated navy skirt knee-length, white knee socks + black loafers. At home wears white oversized sweater + denim shorts. Often carries donut bag.",
+      "embedding": null,
+      "metadata": {},
+      "name": "Nei Shirase",
+      "age": 16,
+      "height_cm": 160,
+      "gender": "female",
+      "hair_color": "long platinum blonde",
+      "eye_color": "light blue-gray",
+      "skin_tone": "fair",
+      "uniform": "navy sailor blouse + red ribbon tie + pleated navy skirt + white knee socks",
+      "home_outfit": "white oversized sweater + denim shorts + thigh-high socks",
+      "personality": "calm, perceptive, gentle but observant",
+      "catchphrase": null,
+      "lora_path": null,
+      "face_ref_image": null,
+      "preferred_bubble_id": "speech_oval",
+      "home_scene_id": "neis-room",
+      "relationships": {
+        "Ren": "best friend",
+        "Yuto": "classmate",
+        "Saki": "classmate"
+      }
+    },
+    "Akira": {
+      "id": "akira",
+      "asset_type": "character",
+      "text_desc": "17 year old Japanese teen male loud and fashion-obsessed, short brown hair, energetic mischievous expression, often in fashionable streetwear with designer sneakers. Borrows against next year's allowance for hyped releases.",
+      "embedding": null,
+      "metadata": {},
+      "name": "Akira Akabane",
+      "age": 17,
+      "height_cm": 168,
+      "gender": "male",
+      "hair_color": "short brown",
+      "eye_color": "dark brown",
+      "skin_tone": "tan",
+      "uniform": "white shirt with loose tie + navy slacks",
+      "home_outfit": "sleeveless graphic tee + jeans + designer sneakers",
+      "personality": "loud, fashion-obsessed, mischievous, money-loose",
+      "catchphrase": null,
+      "lora_path": null,
+      "face_ref_image": null,
+      "preferred_bubble_id": "speech_oval",
+      "home_scene_id": "classroom",
+      "relationships": {
+        "Yuto": "classmate-friend",
+        "Saki": "frequent target"
+      }
+    },
+    "Saki": {
+      "id": "saki",
+      "asset_type": "character",
+      "text_desc": "16 year old Japanese teen girl, shoulder-length brown hair, skeptical raised-eyebrow expression, navy sailor uniform with red ribbon, frequently delivers fashion-critic deadpan remarks.",
+      "embedding": null,
+      "metadata": {},
+      "name": "Saki Marin",
+      "age": 16,
+      "height_cm": 158,
+      "gender": "female",
+      "hair_color": "shoulder-length brown",
+      "eye_color": "dark brown",
+      "skin_tone": "fair",
+      "uniform": "navy sailor uniform + red ribbon tie + skirt",
+      "home_outfit": "casual cardigan + skirt",
+      "personality": "skeptical, deadpan, fashion-critical",
+      "catchphrase": null,
+      "lora_path": null,
+      "face_ref_image": null,
+      "preferred_bubble_id": "speech_oval",
+      "home_scene_id": "classroom",
+      "relationships": {
+        "Akira": "critic",
+        "Yuto": "classmate"
+      }
+    }
+  },
+  "bubbles": {
+    "speech_oval": {
+      "id": "speech_oval",
+      "asset_type": "bubble",
+      "text_desc": "standard manga speech bubble, white oval with black outline, pointed tail toward speaker mouth",
+      "embedding": null,
+      "metadata": {},
+      "shape": "oval",
+      "border_style": "solid",
+      "tail_style": "pointed",
+      "typical_use": "speech",
+      "color_inside": "white",
+      "color_border": "black",
+      "font_weight": "W8",
+      "can_overlap_panel_border": false
+    },
+    "internal_thought": {
+      "id": "internal_thought",
+      "asset_type": "bubble",
+      "text_desc": "internal monologue bubble, cloud-shaped soft edges, no tail (or chain of small circles toward thinker)",
+      "embedding": null,
+      "metadata": {},
+      "shape": "cloud",
+      "border_style": "soft",
+      "tail_style": "chained",
+      "typical_use": "internal_monologue",
+      "color_inside": "white",
+      "color_border": "black",
+      "font_weight": "W8",
+      "can_overlap_panel_border": false
+    },
+    "narrator_box": {
+      "id": "narrator_box",
+      "asset_type": "bubble",
+      "text_desc": "rectangular narration box, typically at panel corner, no tail, holds narrator voice / time-skip markers",
+      "embedding": null,
+      "metadata": {},
+      "shape": "narrator_box",
+      "border_style": "solid",
+      "tail_style": "none",
+      "typical_use": "narration",
+      "color_inside": "white",
+      "color_border": "black",
+      "font_weight": "W8",
+      "can_overlap_panel_border": false
+    },
+    "shout_spike": {
+      "id": "shout_spike",
+      "asset_type": "bubble",
+      "text_desc": "explosive shout bubble, jagged spike border, often overlapping panel border for impact",
+      "embedding": null,
+      "metadata": {},
+      "shape": "shout_spike",
+      "border_style": "spike",
+      "tail_style": "pointed",
+      "typical_use": "shout",
+      "color_inside": "white",
+      "color_border": "black",
+      "font_weight": "W8",
+      "can_overlap_panel_border": true
+    },
+    "whisper_dashed": {
+      "id": "whisper_dashed",
+      "asset_type": "bubble",
+      "text_desc": "quiet whisper bubble, dashed border indicating soft voice",
+      "embedding": null,
+      "metadata": {},
+      "shape": "oval",
+      "border_style": "dashed",
+      "tail_style": "pointed",
+      "typical_use": "whisper",
+      "color_inside": "white",
+      "color_border": "black",
+      "font_weight": "W8",
+      "can_overlap_panel_border": false
+    },
+    "thought_jagged": {
+      "id": "thought_jagged",
+      "asset_type": "bubble",
+      "text_desc": "anxious / shocked thought bubble, jagged interior thoughts",
+      "embedding": null,
+      "metadata": {},
+      "shape": "jagged",
+      "border_style": "spike",
+      "tail_style": "chained",
+      "typical_use": "thought",
+      "color_inside": "white",
+      "color_border": "black",
+      "font_weight": "W8",
+      "can_overlap_panel_border": false
+    },
+    "double_emphasis": {
+      "id": "double_emphasis",
+      "asset_type": "bubble",
+      "text_desc": "double-bordered bubble for important / emphasized speech (e.g. character name reveals)",
+      "embedding": null,
+      "metadata": {},
+      "shape": "oval",
+      "border_style": "double",
+      "tail_style": "pointed",
+      "typical_use": "speech",
+      "color_inside": "white",
+      "color_border": "black",
+      "font_weight": "W8",
+      "can_overlap_panel_border": false
+    },
+    "split_multi": {
+      "id": "split_multi",
+      "asset_type": "bubble",
+      "text_desc": "bubble with multiple tails pointing to multiple speakers (chorus / overlap)",
+      "embedding": null,
+      "metadata": {},
+      "shape": "oval",
+      "border_style": "solid",
+      "tail_style": "split_to_multiple",
+      "typical_use": "speech",
+      "color_inside": "white",
+      "color_border": "black",
+      "font_weight": "W8",
+      "can_overlap_panel_border": false
+    }
+  },
+  "scenes": {
+    "yuto-bedroom": {
+      "id": "yuto-bedroom",
+      "asset_type": "scene",
+      "text_desc": "teenage boy's bedroom at night, lit by smartphone screen and desk lamp, single bed + study desk with phone + small window with curtain",
+      "embedding": null,
+      "metadata": {},
+      "name": "Yuto's bedroom",
+      "usd_path": "yuto-bedroom.usda",
+      "setting_lock": "INTERIOR private teenage boys bedroom, white painted walls, ceiling visible, wooden floor, single bed with blanket, study desk with smartphone, small window with curtain at night, no outdoor, no street, no neon, no alley, no vendor stalls, no lanterns",
+      "time_of_day": "late_night",
+      "weather": "clear",
+      "season": "early autumn",
+      "sun_altitude_deg": -20.0,
+      "sun_azimuth_deg": 0.0,
+      "color_temp_K": 3200,
+      "actors_anchor": {
+        "Yuto": [
+          3.0,
+          0.5,
+          2.0
+        ]
+      },
+      "contained_prop_ids": [
+        "phone",
+        "desk_lamp",
+        "notebook",
+        "single_bed",
+        "smartphone"
+      ]
+    },
+    "classroom": {
+      "id": "classroom",
+      "asset_type": "scene",
+      "text_desc": "Japanese high school classroom 3-B, rows of wooden student desks with chairs, large west-wall windows with afternoon sun, blackboard at front",
+      "embedding": null,
+      "metadata": {},
+      "name": "Akabane Tech High Class 3-B",
+      "usd_path": "classroom.usda",
+      "setting_lock": "INTERIOR Japanese high school classroom (3-B), rows of wooden student desks with chairs, large windows on left wall with afternoon sunlight streaming in, blackboard on front wall, white ceiling, wooden floor, school uniforms, NO street, NO alley, NO neon, NO outdoor, NO vendor stalls, NO lanterns, NO night, NO street lamps",
+      "time_of_day": "afternoon",
+      "weather": "clear",
+      "season": "early autumn",
+      "sun_altitude_deg": 55.0,
+      "sun_azimuth_deg": 240.0,
+      "color_temp_K": 5500,
+      "actors_anchor": {
+        "Yuto": [
+          4.0,
+          0.5,
+          3.5
+        ],
+        "Nei": [
+          3.0,
+          0.5,
+          3.5
+        ],
+        "Ren": [
+          5.0,
+          0.5,
+          3.5
+        ],
+        "Akira": [
+          4.0,
+          0.5,
+          2.5
+        ],
+        "Saki": [
+          5.0,
+          0.5,
+          2.5
+        ]
+      },
+      "contained_prop_ids": [
+        "student_desk",
+        "chair",
+        "blackboard",
+        "teacher_desk",
+        "window"
+      ]
+    },
+    "school-hierarchy": {
+      "id": "school-hierarchy",
+      "asset_type": "scene",
+      "text_desc": "classroom within Akabane Tech High building Floor 3 west wing — sun direction physically correct from building orientation",
+      "embedding": null,
+      "metadata": {},
+      "name": "Classroom 3-B in school context",
+      "usd_path": "school-hierarchy.usda",
+      "setting_lock": "INTERIOR classroom 3-B in school floor 3 west wing, afternoon daylight from west window, NO street NO outdoor",
+      "time_of_day": "afternoon",
+      "weather": "clear",
+      "season": "early autumn",
+      "sun_altitude_deg": 55.0,
+      "sun_azimuth_deg": 240.0,
+      "color_temp_K": 5500,
+      "actors_anchor": {
+        "Yuto": [
+          -11.0,
+          11.0,
+          -4.5
+        ],
+        "Nei": [
+          -12.0,
+          11.0,
+          -4.5
+        ],
+        "Ren": [
+          -10.0,
+          11.0,
+          -4.5
+        ],
+        "Akira": [
+          -11.0,
+          11.0,
+          -5.5
+        ],
+        "Saki": [
+          -10.0,
+          11.0,
+          -5.5
+        ]
+      },
+      "contained_prop_ids": []
+    },
+    "rens-room": {
+      "id": "rens-room",
+      "asset_type": "scene",
+      "text_desc": "dark hacker room with monitor wall + pinboard + gaming chair, evening glow from screens",
+      "embedding": null,
+      "metadata": {},
+      "name": "Ren's hacker den",
+      "usd_path": "rens-room.usda",
+      "setting_lock": "INTERIOR dark hacker den with multi-screen monitor wall glowing, research pinboard, gaming chair, closed blinds, NO outdoor NO classroom",
+      "time_of_day": "late_evening",
+      "weather": "clear",
+      "season": "early autumn",
+      "sun_altitude_deg": -15.0,
+      "sun_azimuth_deg": 0.0,
+      "color_temp_K": 6500,
+      "actors_anchor": {
+        "Ren": [
+          2.8,
+          0.5,
+          2.5
+        ]
+      },
+      "contained_prop_ids": [
+        "monitor_wall",
+        "pinboard",
+        "gaming_chair"
+      ]
+    },
+    "neis-room": {
+      "id": "neis-room",
+      "asset_type": "scene",
+      "text_desc": "bright teenage girl bedroom with vanity mirror + wardrobe + bed + posters, afternoon sun through large window",
+      "embedding": null,
+      "metadata": {},
+      "name": "Nei's room",
+      "usd_path": "neis-room.usda",
+      "setting_lock": "INTERIOR teenage girl's bedroom with vanity mirror with jewelry, wardrobe with clothing, single bed, posters on wall, large bright window with curtains, afternoon daylight, fashionable decor, NO outdoor NO street NO classroom",
+      "time_of_day": "afternoon",
+      "weather": "clear",
+      "season": "early autumn",
+      "sun_altitude_deg": 55.0,
+      "sun_azimuth_deg": 240.0,
+      "color_temp_K": 5200,
+      "actors_anchor": {
+        "Nei": [
+          0.65,
+          0.4,
+          1.5
+        ]
+      },
+      "contained_prop_ids": [
+        "vanity_mirror",
+        "wardrobe",
+        "single_bed",
+        "laptop",
+        "phone"
+      ]
+    },
+    "city-street": {
+      "id": "city-street",
+      "asset_type": "scene",
+      "text_desc": "Japanese residential street with paved sidewalk + low concrete walls + houses, students walking home in school uniforms, bright afternoon",
+      "embedding": null,
+      "metadata": {},
+      "name": "Tokyo residential street afternoon",
+      "usd_path": "city-street.usda",
+      "setting_lock": "EXTERIOR Japanese residential street, daylight bright afternoon, paved sidewalk, low concrete walls, residential houses, students walking home from school in summer school uniforms, bright sky, perspective vanishing point ahead, NO night NO street lamps lit NO classroom interior NO bedroom NO indoor NO dark",
+      "time_of_day": "afternoon",
+      "weather": "clear",
+      "season": "early autumn",
+      "sun_altitude_deg": 45.0,
+      "sun_azimuth_deg": 240.0,
+      "color_temp_K": 5500,
+      "actors_anchor": {},
+      "contained_prop_ids": []
+    }
+  },
+  "props": {
+    "phone": {
+      "id": "phone",
+      "asset_type": "prop",
+      "text_desc": "modern smartphone with glowing screen showing notifications, used heavily by Yuto",
+      "embedding": null,
+      "metadata": {},
+      "name": "smartphone",
+      "usd_path": null,
+      "typical_size_m": [
+        0.08,
+        0.01,
+        0.16
+      ],
+      "typical_position_xyz": null,
+      "color_hint": "dark metallic",
+      "material_class": "metal"
+    },
+    "desk_lamp": {
+      "id": "desk_lamp",
+      "asset_type": "prop",
+      "text_desc": "warm-toned desk lamp on Yuto's study desk, only light source at night",
+      "embedding": null,
+      "metadata": {},
+      "name": "desk lamp",
+      "usd_path": null,
+      "typical_size_m": [
+        0.2,
+        0.45,
+        0.2
+      ],
+      "typical_position_xyz": null,
+      "color_hint": "warm brass",
+      "material_class": "metal"
+    },
+    "student_desk": {
+      "id": "student_desk",
+      "asset_type": "prop",
+      "text_desc": "Japanese high school student desk, single-sided, wooden top with small drawer",
+      "embedding": null,
+      "metadata": {},
+      "name": "wooden student desk",
+      "usd_path": null,
+      "typical_size_m": [
+        0.6,
+        0.75,
+        0.45
+      ],
+      "typical_position_xyz": null,
+      "color_hint": "wooden",
+      "material_class": "wood"
+    },
+    "blackboard": {
+      "id": "blackboard",
+      "asset_type": "prop",
+      "text_desc": "dark green-gray chalkboard at front of classroom, often with class notes",
+      "embedding": null,
+      "metadata": {},
+      "name": "classroom blackboard",
+      "usd_path": null,
+      "typical_size_m": [
+        3.0,
+        1.5,
+        0.05
+      ],
+      "typical_position_xyz": null,
+      "color_hint": "dark green-gray",
+      "material_class": "metal"
+    },
+    "single_bed": {
+      "id": "single_bed",
+      "asset_type": "prop",
+      "text_desc": "single-size bed with blanket and pillow",
+      "embedding": null,
+      "metadata": {},
+      "name": "single bed",
+      "usd_path": null,
+      "typical_size_m": [
+        1.0,
+        0.5,
+        2.0
+      ],
+      "typical_position_xyz": null,
+      "color_hint": "cream sheet, blue blanket",
+      "material_class": "fabric"
+    },
+    "monitor_wall": {
+      "id": "monitor_wall",
+      "asset_type": "prop",
+      "text_desc": "3-5 stacked monitors showing code, terminals, news feeds",
+      "embedding": null,
+      "metadata": {},
+      "name": "multi-monitor wall",
+      "usd_path": null,
+      "typical_size_m": [
+        2.5,
+        1.5,
+        0.1
+      ],
+      "typical_position_xyz": null,
+      "color_hint": "dark metallic + screen glow",
+      "material_class": "plastic"
+    }
+  },
+  "schema_version": "0.1"
+}

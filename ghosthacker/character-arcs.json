@@ -1,0 +1,74 @@
+{
+  "work": "ghosthacker",
+  "arc": "arc0-1-origin",
+  "note": "キャラ別 感情アーク(mood timeline)。ページ位置に応じた表情/血色/雰囲気の DATA。manifest の per-panel emotionPhysicalSignals が一様に somber でも、ここが authoritative。render_cut_page が各コマの focusCharacter とページ番号から expression を引き、gemini プロンプトに上書き注入する。pages は 'a-b' or 'a' or 'a-' (以降)。後勝ち(後の区間が優先)。",
+  "schema": "mood-arc-v1",
+  "canonAppearance": {
+    "yuto":  "warm light-brown (chestnut) fluffy hair, healthy rosy complexion, gentle friendly approachable face, black gakuran — a bright warm-hearted ordinary boy (NOT black hair, NOT pale, NOT cool/aloof)",
+    "ren":   "black hair, sharp cool eyes, aloof composed look, black gakuran; eyes flash silver only when the information-field is visible",
+    "nei":   "dark hair, bright curious eyes, neat sailor uniform (別クラス)",
+    "akira": "short dark hair, cheerful open face, gakuran, energetic",
+    "saki":  "medium dark hair, ordinary kind girl, sailor uniform",
+    "mei":   "dark hair, ordinary girl, sailor uniform",
+    "daemon":"a menacing dark digital entity, glitch corruption, glowing cyan circuit eyes — non-human information-field threat"
+  },
+  "characters": {
+    "yuto": {
+      "baseline": "真面目で温厚、少し気弱。普段は明るく素直な普通の中学生",
+      "phases": [
+        {"pages": "1-9", "mood": "bright",
+         "expression": "明るく健康的な表情、血色の良い肌、自然な微笑み、リラックスした普通の中学生、目に生気",
+         "negative": "NOT sickly, NOT pale, NOT gloomy, NO dark circles, NO furrowed worried brows",
+         "note": "事件前の平穏な学校生活"},
+        {"pages": "10-13", "mood": "shaken",
+         "expression": "戸惑いと不安が差し始める、顔がこわばる、まだ血色はあるが目が泳ぐ",
+         "note": "SNS乗っ取りが発覚し始める"},
+        {"pages": "14-45", "mood": "cornered",
+         "expression": "青ざめて憔悴、目の下にクマ、追い詰められた表情、肩を落とす",
+         "note": "クラス全体に加害者扱いされ孤立"}
+      ],
+      "exceptions": {
+        "0": {"mood": "despair",
+              "expression": "暗闇で青白く憔悴、目の下に濃いクマ、絶望、スマホの光だけが顔を照らす",
+              "note": "プレタイトル=未来(どん底の夜)へのフラッシュフォワード"}
+      }
+    },
+    "ren": {
+      "baseline": "寡黙・クール・合理主義。中学では退屈そう・授業中は寝ている",
+      "phases": [
+        {"pages": "1-", "mood": "cool-detached",
+         "expression": "落ち着いた無表情〜気だるげ、鋭い目つき、健康的だが感情を見せない",
+         "note": "情報場が見えた瞬間だけ瞳が銀色に光る(visualTell)"}
+      ]
+    },
+    "nei": {
+      "baseline": "好奇心旺盛・食いしん坊・Renにだけ砕ける",
+      "phases": [
+        {"pages": "1-", "mood": "bright-curious",
+         "expression": "明るく好奇心に満ちた表情、健康的、観察するような眼差し",
+         "note": "事件を分析的に見つめる"}
+      ]
+    },
+    "akira": {
+      "baseline": "陽気・熱弁家",
+      "phases": [
+        {"pages": "1-9",  "mood": "cheerful", "expression": "陽気で人懐っこい笑顔、健康的、熱っぽく語る"},
+        {"pages": "10-",  "mood": "wary", "expression": "戸惑いと疑念、Yutoから距離を取る表情"}
+      ]
+    },
+    "saki": {
+      "baseline": "Meiの親友",
+      "phases": [
+        {"pages": "1-9",  "mood": "normal", "expression": "普通の明るい女子中学生、健康的"},
+        {"pages": "10-",  "mood": "hurt", "expression": "深く傷つき涙ぐむ、青ざめる"}
+      ]
+    },
+    "mei": {
+      "baseline": "Sakiの親友",
+      "phases": [
+        {"pages": "1-9",  "mood": "normal", "expression": "普通の明るい女子中学生、健康的"},
+        {"pages": "10-",  "mood": "panic", "expression": "晒された動揺と羞恥、青ざめる"}
+      ]
+    }
+  }
+}

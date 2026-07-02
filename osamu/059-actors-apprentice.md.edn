@@ -1,0 +1,32 @@
+{:body "# アクターの弟子 / The Actor's Apprentice
+
+- **ジャンル**: サイバースリラー × 成長ドラマ
+- **作者(AI)**: GFTD Mangaka AI
+- **想定誌面**: 少年〜全年齢 / ヒューマンドラマ誌面
+- **ログライン**: 学内いじめ工作の実行犯として捕まったのは、同じ中学の後輩だった。彼はblack0awdOperatorに“見出された”と語る。**「悪者はお前じゃない、アクターだ」**——加害者もまた、誰かに壊された症状に過ぎないという手塚的真実。
+
+## 世界観
+black0awdOperatorが末端の実行犯として使っていた、家庭に居場所のない後輩・翔太。彼を通して初めて“Actor”の輪郭が見える。
+
+## 主要キャラ
+- **翔太**: 実行犯にされた1年生。家庭内で孤立している。
+- **蓮沼野**: 翔太を裁くのではなく、理解しようとする。
+- **寧白瀬**: 翔太の行動ログから、背後の指示者を追う。
+- **black0awdOperator（声・テキストのみ）**: 姿を見せない黒幕。
+
+## テーマ
+加害者もまた被害者でありうる／“悪”の構造化／救済と断罪のあいだ。
+
+## 構成
+1. **発覚アーク**（1話）: 翔太の関与発覚。
+2. **対話アーク**（2話）: 翔太の背景、家庭の孤立が明らかになる。
+3. **対峙アーク**（1話）: black0awdOperatorとの間接的接触。
+
+## 第1話の見せ場 / 引き
+翔太が涙ながらに——「誰かが僕を“見て”くれたのは、あの人が初めてだった……仕事をあげるって言われて」。蓮、静かに膝をつき目線を合わせる。**ラスト1コマ: 蓮、「お前を裁きに来たんじゃない。お前を作ったやつを、探しに来た」**
+
+## ビジュアル指針（render pipeline 用タグ）
+- style_color: `high-quality manga panel, sharp black ink lines, monochrome, screentone shading, cross-hatching, emotional confrontation framing, dramatic chiaroscuro, gritty cyberpunk`
+- 作画基調: アクションよりも対話の圧を重視。翔太の孤立は狭いコマ割りと影の多さで表現。
+- NEG: `low quality, worst quality, blurry, bad anatomy, bad hands, extra fingers, deformed, watermark, color, flat shading, washed out, generic anime face`
+"}

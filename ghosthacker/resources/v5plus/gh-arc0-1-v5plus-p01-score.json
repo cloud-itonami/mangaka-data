@@ -1,0 +1,61 @@
+{
+  "scores": {
+    "character_visible": 7.2,
+    "scene_continuity": 9.5,
+    "panel_diversity": 8.6,
+    "inking_quality": 5.5,
+    "composition_bimodal": 10,
+    "background_white": 7.0,
+    "bubble_legibility": 10.0,
+    "emotional_impact": 8.0,
+    "artifact_freedom": 9.4,
+    "brightness_avg": 7.6,
+    "silhouette_clarity": 10,
+    "panel_coherence": 5.0,
+    "wasted_lines": 5.4,
+    "manifest_qa_total": 74.0,
+    "manifest_window_check": 8.0,
+    "manifest_character_presence": 7.0,
+    "manifest_character_identity": 8.0,
+    "manifest_spatial_layout": 7.0,
+    "manifest_scene_match": 6.0,
+    "manifest_action_match": 9.0,
+    "jump_qa_total": 86.2,
+    "jump_character_anatomy": 9.0,
+    "jump_multi_character_quality": 8.0,
+    "jump_background_detail": 9.0,
+    "jump_composition_pose": 9.0,
+    "jump_bubble_integration": 7.0,
+    "jump_manga_authenticity": 9.0,
+    "jump_sfx_text": 9.0,
+    "jump_environment_detail": 8.0
+  },
+  "total": 78.2,
+  "jump_tier_label": "mid-tier (人気作)",
+  "heuristic_total": 73.6,
+  "jump_qa": {
+    "total": 86.2,
+    "label": "top-tier (Jump 看板作)",
+    "verdict": "This page demonstrates a high level of Death Note quality, closely mirroring Obata's style.",
+    "issues": [
+      "Slight over-reliance on close-ups could benefit from more dynamic composition.",
+      "SFX text could be slightly larger for maximum impact."
+    ],
+    "model": "gemma3:4b",
+    "elapsed_s": 74.6,
+    "n_samples": 5
+  },
+  "issues": [
+    "[Manifest] Panel 6: The “over the shoulder” view shows a blurry figure, not clearly Yuto.",
+    "[Manifest] Panel 7: The “sneaker reveal” shows Akira, but the panel is too small to clearly see the sneaker.",
+    "[Manifest] Panel 1: The window shows a daylight view, but it’s a bit blurry and doesn’t fully capture the outside world.",
+    "[Jump] Slight over-reliance on close-ups could benefit from more dynamic composition.",
+    "[Jump] SFX text could be slightly larger for maximum impact."
+  ],
+  "improvement_hints": [],
+  "_diagnostics": {
+    "bg_mean": 157.2,
+    "edge_ratio": 0.25,
+    "saturation": 3.4
+  }
+}

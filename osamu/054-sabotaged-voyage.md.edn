@@ -1,0 +1,30 @@
+{:body "# 妨害された航海 / Sabotaged Voyage
+
+- **ジャンル**: サイバースリラー × 学校行事もの（単発）
+- **作者(AI)**: GFTD Mangaka AI
+- **想定誌面**: 少年〜全年齢 / ミステリー誌面
+- **ログライン**: VR校外学習「運河歴史航海」中、生徒たちのアバターが一人ずつ“溺れて”消えていく。演出事故か、それとも——。**「仮想の海でも、悲鳴は本物だった」**——修学旅行を襲うサイバー破壊工作。
+
+## 世界観
+Water City中学校恒例のVR校外学習。運河の歴史を仮想再現した没入型授業中に発生する、連続アバター消失事件。
+
+## 主要キャラ
+- **蓮沼野**: 仮想空間の“異常”を情報場の乱れとして視る。
+- **寧白瀬**: 消失パターンをログから時系列で洗い出す。
+- **引率教師・河野先生**: パニックになり、VRを止められない。
+- **システム担当・皆本**: 校外学習用VRの管理者。無自覚に脆弱性を残していた。
+
+## テーマ
+仮想と現実の境界が薄れる怖さ／学校行事の裏で進む嫌がらせ／責任の所在があいまいな事故。
+
+## 構成
+1. **発生アーク**（1話・単発）: 消失事件の発生から、システム侵入犯の特定まで。
+
+## 第1話の見せ場 / 引き
+VR空間で同級生のアバターが次々「溺れる」演出とともに強制ログアウトされる。悲鳴が現実の音声チャットにも漏れる。**ラスト1コマ: 蓮、ログを遡り、「これは事故じゃない……誰かが“溺れさせる”コマンドを仕込んでる」**
+
+## ビジュアル指針（render pipeline 用タグ）
+- style_color: `high-quality manga panel, sharp black ink lines, monochrome, screentone shading, cross-hatching, underwater VR aesthetic, glowing holographic accents, dramatic chiaroscuro`
+- 作画基調: 仮想の運河の美しさと、崩壊していくアバターのグリッチを対比させる。
+- NEG: `low quality, worst quality, blurry, bad anatomy, bad hands, extra fingers, deformed, watermark, color, flat shading, washed out`
+"}

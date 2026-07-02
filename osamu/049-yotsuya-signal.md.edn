@@ -1,0 +1,30 @@
+{:body "# 四つ谷シグナル / The Yotsuya Signal
+
+- **ジャンル**: サイバースリラー × 星座的クロスオーバー（単発）
+- **作者(AI)**: GFTD Mangaka AI
+- **想定誌面**: 少年〜全年齢 / ミステリー誌面
+- **ログライン**: 運河市に届いた、出所不明の暗号電波。解析すると、遠くどこかの“シュワ事務所”なる組織の署名が一瞬だけ混じっていた。**「同じ夜空の下で、別の誰かも同じ怪物と戦っている」**——世界は繋がっているようで、繋がっていない。手塚的スターシステムの一瞬の瞬き。
+
+## 世界観
+Water Cityの高層通信塔に届く出所不明の電波ノイズ。解析途中、聞いたことのない組織名と“AI少女”らしき署名が一瞬だけ浮かび、すぐ消える。
+
+## 主要キャラ
+- **蓮沼野**: 情報場の“異物”としてノイズを視る。
+- **寧白瀬**: 電波データの中に規則性を見出そうとする。
+- **通信塔管理人・老田**: 電波の“迷子”を長年観測してきた老人。
+- **謎のログイン痕跡「環-Nei」**: 名前だけが一瞬浮かぶ、姿を見せない存在。
+
+## テーマ
+世界の広さと孤独／自分たちの戦いが世界のどこかと地続きである予感／直接交わらないまま尊重し合う“別の物語”。
+
+## 構成
+1. **傍受アーク**（1話・単発）: 電波ノイズの発見、正体不明のまま消える署名。
+
+## 第1話の見せ場 / 引き
+寧が電波データの中に「TAMAKI-NEI」らしき文字列と“Schwa”のヘッダーを見つけるが、次の瞬間ノイズに埋もれて消える。蓮「……今の、なんだ?」。**ラスト1コマ: 老田、遠い目で、「この街の空は、思ってるよりずっと広いんだよ」**
+
+## ビジュアル指針（render pipeline 用タグ）
+- style_color: `high-quality manga panel, sharp black ink lines, monochrome, screentone shading, cross-hatching, night sky over canal city, faint starfield motif, dramatic chiaroscuro, glowing signal accents`
+- 作画基調: 夜空と通信塔のシルエットを大ゴマで。信号のノイズは砂嵐のようなスクリーントーンで表現。
+- NEG: `low quality, worst quality, blurry, bad anatomy, bad hands, extra fingers, deformed, watermark, color, flat shading, washed out`
+"}

@@ -1,0 +1,73 @@
+{
+  "scores": {
+    "character_visible": 9.4,
+    "scene_continuity": 7.5,
+    "panel_diversity": 9.6,
+    "inking_quality": 9.5,
+    "composition_bimodal": 10,
+    "background_white": 2.5,
+    "bubble_legibility": 10.0,
+    "emotional_impact": 9.6,
+    "artifact_freedom": 10.0,
+    "brightness_avg": 10,
+    "silhouette_clarity": 10,
+    "panel_coherence": 9.2,
+    "wasted_lines": 3.7,
+    "jump_qa_total": 77.4,
+    "jump_character_anatomy": 8.0,
+    "jump_multi_character_quality": 7.0,
+    "jump_background_detail": 6.0,
+    "jump_composition_pose": 8.0,
+    "jump_bubble_integration": 7.0,
+    "jump_manga_authenticity": 9.0,
+    "jump_sfx_text": 8.0,
+    "jump_environment_detail": 8.0
+  },
+  "total": 79.1,
+  "jump_tier_label": "mid-tier (人気作)",
+  "heuristic_total": 81.1,
+  "jump_qa": {
+    "total": 77.4,
+    "label": "mid-tier (人気作)",
+    "verdict": "The page demonstrates strong Death Note-influenced qualities with some minor deviations.",
+    "issues": [
+      "The background detail, while good, could benefit from a slightly higher level of photographic realism to fully match Obata’s style.",
+      "The SFX text could be slightly larger and more integrated into the panel to fully capture the Death Note aesthetic."
+    ],
+    "model": "gemma3:4b",
+    "elapsed_s": 230.4,
+    "n_samples": 5
+  },
+  "issues": [
+    "background gray-midtone (bg_mean=55, paper should be ≥240)",
+    "[Jump] The background detail, while good, could benefit from a slightly higher level of photographic realism to fully match Obata’s style.",
+    "[Jump] The SFX text could be slightly larger and more integrated into the panel to fully capture the Death Note aesthetic."
+  ],
+  "improvement_hints": [
+    "Blender: set single_color=(1,1,1) + film transparent off + world background white"
+  ],
+  "_diagnostics": {
+    "bg_mean": 54.6,
+    "edge_ratio": 0.104,
+    "saturation": 0.0
+  },
+  "version": {
+    "v5_base": "v10",
+    "engine": "ComfyUI-first",
+    "preset": "ghosthacker",
+    "pipeline_default": null,
+    "panel_pipelines": {
+      "1": "cu_ink",
+      "2": "cu_action",
+      "3": "cu_ink",
+      "4": "cu_ink_usd"
+    },
+    "panel_scores": {
+      "1": 69.2,
+      "2": 77.5,
+      "3": 78.7,
+      "4": 42.3
+    },
+    "rendered_at": 1779691556
+  }
+}

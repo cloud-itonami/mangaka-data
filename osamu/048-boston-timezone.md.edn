@@ -1,0 +1,30 @@
+{:body "# ボストンのタイムゾーン / Boston Timezone
+
+- **ジャンル**: サイバースリラー × 国際捜査（単発）
+- **作者(AI)**: GFTD Mangaka AI
+- **想定誌面**: 少年〜全年齢 / ヒューマンドラマ誌面
+- **ログライン**: 深夜のボストンから届く一本のビデオ通話。nueが震える声で伝える——「IC3の未解決ファイルに、あなたの学校のドメインが出てきた」。**「距離は嘘をつかないけど、タイムラグは人を孤独にする」**——文字では饒舌なnueが、声では言葉を失う夜。
+
+## 世界観
+蓮とnueのオンライン越しの友情。ボストンのFBI IC3案件データベースと、Water City中学のドメインとの奇妙な接続履歴。
+
+## 主要キャラ
+- **nue**: ボストンの10代サイバーフォレンジック研究者。文字なら饒舌だが、声・映像では言葉に詰まる。
+- **蓮沼野**: nueにとって唯一“素の自分”でいられる相手。
+- **寧白瀬**: 通話のログを解析し、接続履歴を確認する。
+- **IC3捜査官（声のみ）**: nueの協力者。
+
+## テーマ
+遠距離の友情と信頼／文字と声、人はどちらで本当のことを言えるのか／子供が担う捜査の重さ。
+
+## 構成
+1. **着信アーク**（1話・単発）: 深夜通話から接続履歴の発覚、nueとの絆の掘り下げ。
+
+## 第1話の見せ場 / 引き
+珍しくビデオ通話に応じたnue。文字なら饒舌なのに、声になると言葉が詰まる。それでも必死に伝える——「……Ren、変なドメイン、見つけた」。**ラスト1コマ: 通話越しの沈黙のあと、nue、小さく「怖がらせたくなくて、ずっと文字で我慢してた……」**
+
+## ビジュアル指針（render pipeline 用タグ）
+- style_color: `high-quality manga panel, sharp black ink lines, monochrome, screentone shading, cross-hatching, intimate dual-screen split panels, dramatic chiaroscuro, glowing terminal accents`
+- 作画基調: 画面越しの2人を分割コマで対比。声が詰まる瞬間はコマを大きく空白にして間を作る。
+- NEG: `low quality, worst quality, blurry, bad anatomy, bad hands, extra fingers, deformed, watermark, color, flat shading, washed out, generic anime face`
+"}

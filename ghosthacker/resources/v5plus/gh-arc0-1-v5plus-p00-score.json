@@ -1,0 +1,57 @@
+{
+  "scores": {
+    "character_visible": 9.8,
+    "scene_continuity": 8.5,
+    "panel_diversity": 9.0,
+    "inking_quality": 9.0,
+    "composition_bimodal": 10,
+    "background_white": 7.0,
+    "bubble_legibility": 10.0,
+    "emotional_impact": 9.9,
+    "artifact_freedom": 7.7,
+    "brightness_avg": 8.4,
+    "silhouette_clarity": 10,
+    "panel_coherence": 9.5,
+    "wasted_lines": 3.6,
+    "manifest_qa_total": 95.5,
+    "manifest_window_check": 9.0,
+    "manifest_character_presence": 9.0,
+    "manifest_character_identity": 10.0,
+    "manifest_spatial_layout": 9.0,
+    "manifest_scene_match": 10.0,
+    "manifest_action_match": 10.0,
+    "jump_qa_total": 89.0,
+    "jump_character_anatomy": 9.0,
+    "jump_multi_character_quality": 8.0,
+    "jump_background_detail": 9.0,
+    "jump_composition_pose": 9.0,
+    "jump_bubble_integration": 8.0,
+    "jump_manga_authenticity": 9.0,
+    "jump_sfx_text": 10.0,
+    "jump_environment_detail": 9.0
+  },
+  "total": 90.6,
+  "jump_tier_label": "Death Note class (Obata級)",
+  "heuristic_total": 85.0,
+  "jump_qa": {
+    "total": 89.0,
+    "label": "top-tier (Jump 看板作)",
+    "verdict": "This page demonstrates exceptional quality, closely mirroring Death Note’s artistic standards.",
+    "issues": [
+      "None"
+    ],
+    "model": "gemma3:4b",
+    "elapsed_s": 68.2,
+    "n_samples": 5
+  },
+  "issues": [
+    "[Manifest] None",
+    "[Jump] None"
+  ],
+  "improvement_hints": [],
+  "_diagnostics": {
+    "bg_mean": 99.6,
+    "edge_ratio": 0.16,
+    "saturation": 13.7
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "scores": {
+    "character_visible": 6.3,
+    "scene_continuity": 9.5,
+    "panel_diversity": 9.7,
+    "inking_quality": 9.6,
+    "composition_bimodal": 5.7,
+    "background_white": 5.6,
+    "bubble_legibility": 10.0,
+    "emotional_impact": 6.2,
+    "artifact_freedom": 9.7,
+    "brightness_avg": 9.1,
+    "silhouette_clarity": 10,
+    "panel_coherence": 9.3,
+    "wasted_lines": 1.0,
+    "manifest_qa_total": 80.5,
+    "manifest_window_check": 6.0,
+    "manifest_character_presence": 8.0,
+    "manifest_character_identity": 9.0,
+    "manifest_spatial_layout": 7.0,
+    "manifest_scene_match": 9.0,
+    "manifest_action_match": 8.0,
+    "jump_qa_total": 85.6,
+    "jump_character_anatomy": 9.0,
+    "jump_multi_character_quality": 8.0,
+    "jump_background_detail": 7.0,
+    "jump_composition_pose": 9.0,
+    "jump_bubble_integration": 7.0,
+    "jump_manga_authenticity": 10.0,
+    "jump_sfx_text": 9.0,
+    "jump_environment_detail": 8.0
+  },
+  "total": 80.6,
+  "jump_tier_label": "top-tier (Jump 看板作)",
+  "heuristic_total": 73.9,
+  "jump_qa": {
+    "total": 85.6,
+    "label": "top-tier (Jump 看板作)",
+    "verdict": "This page demonstrates a high level of Death Note quality, closely mirroring Obata's style.",
+    "issues": [
+      "Slight over-reliance on detailed character anatomy could be toned down slightly.",
+      "Background detail is excellent but could benefit from a touch more subtle variation."
+    ],
+    "model": "gemma3:4b",
+    "elapsed_s": 71.0,
+    "n_samples": 5
+  },
+  "issues": [
+    "background gray-midtone (bg_mean=174, paper should be ≥240)",
+    "[Manifest] panel 1: window shows a blurry, indistinct view of the outside, lacking detail.",
+    "[Manifest] panel 7: the background is a bit too bright, distracting from the focus on the order confirmation.",
+    "[Jump] Slight over-reliance on detailed character anatomy could be toned down slightly.",
+    "[Jump] Background detail is excellent but could benefit from a touch more subtle variation."
+  ],
+  "improvement_hints": [
+    "Blender: set single_color=(1,1,1) + film transparent off + world background white"
+  ],
+  "_diagnostics": {
+    "bg_mean": 174.3,
+    "edge_ratio": 0.106,
+    "saturation": 2.0
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "scores": {
+    "character_visible": 8.5,
+    "scene_continuity": 9.5,
+    "panel_diversity": 9.9,
+    "inking_quality": 3.6,
+    "composition_bimodal": 10,
+    "background_white": 5.0,
+    "bubble_legibility": 10.0,
+    "emotional_impact": 9.0,
+    "artifact_freedom": 9.5,
+    "brightness_avg": 7.8,
+    "silhouette_clarity": 10,
+    "panel_coherence": 3.1,
+    "wasted_lines": 5.8,
+    "manifest_qa_total": 62.5,
+    "manifest_window_check": 6.0,
+    "manifest_character_presence": 4.0,
+    "manifest_character_identity": 7.0,
+    "manifest_spatial_layout": 8.0,
+    "manifest_scene_match": 6.0,
+    "manifest_action_match": 7.0,
+    "jump_qa_total": 87.0,
+    "jump_character_anatomy": 9.0,
+    "jump_multi_character_quality": 8.0,
+    "jump_background_detail": 9.0,
+    "jump_composition_pose": 9.0,
+    "jump_bubble_integration": 8.0,
+    "jump_manga_authenticity": 9.0,
+    "jump_sfx_text": 8.0,
+    "jump_environment_detail": 9.0
+  },
+  "total": 73.3,
+  "jump_tier_label": "mid-tier (人気作)",
+  "heuristic_total": 71.5,
+  "jump_qa": {
+    "total": 87.0,
+    "label": "top-tier (Jump 看板作)",
+    "verdict": "This page demonstrates a strong adherence to Death Note’s visual style and quality.",
+    "issues": [
+      "Slight over-reliance on dramatic poses could be refined for greater naturalism.",
+      "The SFX text could be more integrated into the panel flow, although currently effective."
+    ],
+    "model": "gemma3:4b",
+    "elapsed_s": 72.0,
+    "n_samples": 5
+  },
+  "issues": [
+    "panel content chaotic (edge density 28.79% > 15%) — meaning unclear",
+    "background gray-midtone (bg_mean=180, paper should be ≥240)",
+    "ink edges too soft — looks like 3D render, not inked manga",
+    "[Manifest] Panel 1: The window shows a blurry, indistinct view, not a clear outside scene.",
+    "[Manifest] Panel 2: The classroom appears somewhat empty, with only Akira and Yuto visible, not reflecting the expected group setting.",
+    "[Manifest] Panel 3: The window is dark, lacking any visible outside view.",
+    "[Manifest] Panel 4: The window is dark, lacking any visible outside view.",
+    "[Manifest] Panel 6: The window is dark, lacking any visible outside view.",
+    "[Jump] Slight over-reliance on dramatic poses could be refined for greater naturalism.",
+    "[Jump] The SFX text could be more integrated into the panel flow, although currently effective."
+  ],
+  "improvement_hints": [
+    "lower denoise to 0.55 OR strengthen NEG '(blurry, messy, abstract)'",
+    "Blender: set single_color=(1,1,1) + film transparent off + world background white",
+    "Cycles+OSL line-weight shader / increase Workbench cavity / outline width"
+  ],
+  "_diagnostics": {
+    "bg_mean": 179.5,
+    "edge_ratio": 0.288,
+    "saturation": 3.3
+  }
+}

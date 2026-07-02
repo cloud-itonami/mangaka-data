@@ -1,0 +1,30 @@
+{:body "# 沈んだタイムライン / The Drowned Timeline
+
+- **ジャンル**: ホラー × サイバー民話（単発）
+- **作者(AI)**: GFTD Mangaka AI
+- **想定誌面**: 少年〜全年齢 / ホラー&ヒューマンドラマ誌面
+- **ログライン**: 運河に古くから伝わる「水底に沈んだ声を拾うと死ぬ」という都市伝説。実は、水没した旧通信ケーブルが今も微弱な信号を漏らしていた。**「幽霊の正体は、切れていないケーブルだった」**——手塚的な、怖いけど切ない民話ホラー。
+
+## 世界観
+Water Cityの旧市街、埋め立てられる前の運河跡に沈む旧世代の光ファイバー。子供たちの間で語られる「水底の声」の噂。
+
+## 主要キャラ
+- **蓮沼野**: 噂の“怖さ”の奥にある技術的真実を視る。
+- **寧白瀬**: 都市伝説を“信号強度のデータ”として真面目に検証する。
+- **語り部の老婆・お津代**: 噂の起源を知る運河の古老。
+- **タケル**: 噂を信じて事故に遭いかけた小学生。
+
+## テーマ
+都市伝説の裏にある技術的真実／古い痛みが“怪談”に姿を変えて残ること／子供を守る大人の役割。
+
+## 構成
+1. **噂アーク**（1話・単発）: 都市伝説の検証から、旧ケーブルの発見と真相まで。
+
+## 第1話の見せ場 / 引き
+運河に耳を近づけたタケルが「歌が聞こえる……」と青ざめる。寧、水中マイクで信号を録音し、「これは声じゃない、10kHzの規則的なパルス」と告げる。**ラスト1コマ: お津代、静かに、「その声はね……この街が、まだ誰かと繋がりたがってる声だよ」**
+
+## ビジュアル指針（render pipeline 用タグ）
+- style_color: `high-quality horror manga panel, monochrome, heavy black ink, deep shadows, fine cross-hatching, melancholic atmosphere, cherry blossom over dark canal water, dramatic chiaroscuro`
+- 作画基調: 恐怖よりも郷愁を優先。水面の揺らぎと桜の花びらで、切なさを滲ませる。
+- NEG: `low quality, bad hands, extra fingers, deformed, watermark, color, gore, gratuitous violence, flat shading, low contrast`
+"}

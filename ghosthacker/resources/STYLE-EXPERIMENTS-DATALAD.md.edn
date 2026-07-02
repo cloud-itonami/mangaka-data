@@ -1,0 +1,24 @@
+{:body "# style-experiments → DataLad
+
+The `style-experiments/` binaries (142 files, 167 MB) are **not in git** — they live in
+a DataLad dataset to keep the main repo pack slim. Pattern: ADR-2605302300 (DataLad +
+git-annex SHA256E + IPFS pin).
+
+| | |
+|---|---|
+| Dataset | `~/gftdcojp/mangaka-ghosthacker-assets` |
+| Backend | git-annex SHA256E |
+| IPFS top CID | `bafybeigwdw4oetm24hlxhmggh2q7lfh37e3jzc5rs5q7jhbo4x5a6f5edu` (CIDv1) |
+| Files / size | 142 / 167 MB |
+| Extracted from | commit `2ae44eb9c43` (rebuilt code-only as `6b7316d674e`) |
+
+## Retrieve
+
+```bash
+datalad get -d ~/gftdcojp/mangaka-ghosthacker-assets style-experiments   # git-annex
+ipfs get bafybeigwdw4oetm24hlxhmggh2q7lfh37e3jzc5rs5q7jhbo4x5a6f5edu     # IPFS pin
+```
+
+`style-experiments/` is git-ignored here (see `60-apps/ai-gftd-project-mangaka/.gitignore`)
+so new binaries route to DataLad, not git.
+"}

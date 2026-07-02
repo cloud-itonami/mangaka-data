@@ -1,0 +1,81 @@
+;; Mangaka style registry — テーマ/ジャンルで作画スタイルを切り替える SSoT。
+;;
+;; render パイプライン (v10_panel_render / coscientist_quality / *_gen) は
+;; lg_mangaka.style_registry.resolve(work-rkey genre shot) で profile を引く。
+;; 解決順: :default <- genre->style <- work->style(override) に :shot-modifiers を付加。
+;;
+;; profile の値は data/originals の visual指針 + co-scientist 品質ループの学び
+;; (ADR-2606162100: 具体技法タグ / micro-texture / chiaroscuro) を反映。
+{:version 2
+ :default :cyber-noir-ink
+
+ ;; genre 文字列 (vertex_mangaka.props.genre) -> profile key
+ :genre->style
+ {"cyber-thriller"     :cyber-noir-ink
+  "サイバースリラー"     :cyber-noir-ink
+  "和風伝奇アクション"   :sumi-e-gritty
+  "音楽×超常ドラマ"      :soft-watercolor
+  "日常×科学グルメ"      :bright-clean
+  "ホラー"              :horror-ink
+  "バトル"              :shonen-action-ink}
+
+ ;; 作品 rkey -> profile key (genre より優先する明示オーバーライド)
+ :work->style
+ {"gh-arc0-1"  :cyber-noir-ink
+  "yamainu-1"  :sumi-e-gritty
+  "zankyo-1"   :soft-watercolor
+  "halfgram-1" :bright-clean}
+
+ :profiles
+ {:cyber-noir-ink
+  {:mode :ink
+   :positive "high-quality manga panel, sharp black ink lines, monochrome, screentone shading, cross-hatching, balanced line density, high-frequency texture, dramatic chiaroscuro, gritty cyberpunk, glowing holographic accents"
+   :negative "low quality, worst quality, jpeg artifacts, blurry, bad anatomy, bad hands, extra fingers, deformed, watermark, color, low contrast, flat shading, washed out, generic anime face"
+   :cfg 7.5 :steps 30 :sampler "euler"
+   :source "co-scientist deep run 94/100 (ADR-2606162100)"}
+
+  :sumi-e-gritty
+  {:mode :ink
+   :positive "masterpiece, best quality, monochrome, manga, traditional_media, sumi-e ink wash, heavy black ink, deep blacks, dramatic chiaroscuro, heavy cross-hatching, high-frequency texture, ink splatter, fine detailed linework, meiji era japan"
+   :negative "color photograph, modern, 3d render, bad hands, extra fingers, deformed, low quality, watermark, text, low contrast, flat shading, washed out, soft focus"
+   :cfg 7.0 :steps 28 :sampler "dpmpp_2m_sde"
+   :source "山犬と硯 v2 + co-scientist technique tags"}
+
+  :soft-watercolor
+  {:mode :color
+   :positive "masterpiece, best quality, very aesthetic, manga, soft lighting, watercolor tones, melancholic, emotional, delicate linework, atmospheric, gentle gradients"
+   :negative "low quality, bad hands, extra fingers, harsh contrast, chaotic, deformed, watermark, text, gritty, heavy black, ink splatter"
+   :cfg 7.0 :steps 28 :sampler "dpmpp_2m_sde"
+   :source "残響のカルテット visual指針"}
+
+  :bright-clean
+  {:mode :color
+   :positive "masterpiece, best quality, manga, bright, warm, cozy, slice of life, clean lineart, vibrant, cheerful, detailed, soft daylight"
+   :negative "low quality, dark, gloomy, horror, bad hands, extra fingers, deformed, watermark, text, gritty, heavy shadows, ink splatter, low contrast"
+   :cfg 7.0 :steps 28 :sampler "dpmpp_2m_sde"
+   :source "0.5グラムの宇宙 visual指針"}
+
+  :horror-ink
+  {:mode :ink
+   :positive "high-quality horror manga panel, monochrome, heavy black ink, deep shadows, fine cross-hatching, unsettling atmosphere, high-frequency texture, dramatic chiaroscuro, eerie"
+   :negative "low quality, bad hands, extra fingers, deformed, watermark, color, cute, bright, cheerful, flat shading, low contrast"
+   :cfg 7.5 :steps 30 :sampler "euler"
+   :source "co-scientist ink baseline + horror tilt"}
+
+  :shonen-action-ink
+  {:mode :ink
+   :positive "high-quality shonen manga panel, monochrome, bold black ink, dynamic action, speed lines, motion blur, impact frames, heavy contrast, cross-hatching, high-frequency texture"
+   :negative "low quality, bad hands, extra fingers, deformed, watermark, color, static, dull, flat shading, low contrast, washed out"
+   :cfg 7.5 :steps 28 :sampler "dpmpp_2m_sde"
+   :source "co-scientist ink baseline + shonen action tilt"}}
+
+ ;; shot 種別で :positive に付加する修飾 (ADR-2606162100: 強度↔構図明瞭性の両立)。
+ ;; establishing/wide は splatter を抑えて可読性を確保、closeup/action は強度寄り。
+ :shot-modifiers
+ {"wide"       "wide establishing shot, clear readable composition, restrained ink splatter"
+  "establish"  "establishing shot, clear composition, restrained splatter"
+  "high-angle" "high angle shot, clear layout"
+  "medium"     "medium shot, balanced composition"
+  "ots"        "over the shoulder shot"
+  "closeup"    "extreme close-up, intense detail, dramatic"
+  "action"     "dynamic action, motion lines, speed lines, impact"}}

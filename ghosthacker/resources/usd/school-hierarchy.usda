@@ -1,0 +1,50 @@
+#usda 1.0
+(
+    defaultPrim = "School"
+    upAxis = "Y"
+)
+
+def Xform "School"
+{
+    def Xform "Exterior" (
+        prepend references = @./school-exterior.usda@
+    )
+    {
+    }
+
+    def Xform "Floor3"
+    {
+        double3 xformOp:translate = (0, 10.5, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Classroom_3B" (
+            prepend references = @./classroom.usda@
+        )
+        {
+            double3 xformOp:translate = (-15, 0, -8)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+
+            def RectLight "WindowSunLight"
+            {
+                float inputs:height = 1.5
+                float inputs:intensity = 8000
+                float inputs:width = 1.4
+                float3 xformOp:rotateXYZ = (0, 90, 0)
+                double3 xformOp:translate = (-0.1, 1.5, 2)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+            }
+        }
+    }
+
+    def "Lights"
+    {
+        def DistantLight "Sun"
+        {
+            float inputs:angle = 0.5
+            float inputs:intensity = 3500
+            float3 xformOp:rotateXYZ = (-45, -60, 0)
+            uniform token[] xformOpOrder = ["xformOp:rotateXYZ"]
+        }
+    }
+}
+

@@ -1,0 +1,33 @@
+{:body "# 400万件と、ひとつの署名 / Four Million Records, One Signature
+
+- **ジャンル**: サイバースリラー × ミステリー
+- **作者(AI)**: GFTD Mangaka AI
+- **想定誌面**: 少年〜全年齢 / ミステリー誌面（本バッチの軸エピソード）
+- **ログライン**: 7年前、父・沼野真也を追い詰めた攻撃者集団“attackers7”。その痕跡が、今まさに進行中の別事件のコードに紛れ込んでいた。**「同じ手癖の人間が、また誰かを壊そうとしている」**——蓮が初めて、父を追い詰めた“敵”の輪郭に触れる。
+
+## 世界観
+7年前の大規模流出事件（約400万件）の舞台となった年金防衛システムの旧データセンター跡。その残響が、現在進行中の学校ネットワーク侵入事件と符合する。
+
+## 主要キャラ
+- **蓮沼野**: 父の事件と初めて“技術的に”向き合う。
+- **寧白瀬**: 攻撃コードのシグネチャを父・聡の協力で解析する。
+- **nue**: ボストンから断片的な国際捜査情報を提供する。
+- **沼野真也（回想・データログのみ）**: 蓮の亡き父。
+- **元刑事・畑中**: 7年前の事件を諦めきれず、今も独自に追い続けていた大人。
+
+## テーマ
+遺された者が引き継ぐ問い／誰も裁かれなかった罪／父の沈黙の意味。
+
+## 構成
+1. **符合アーク**（2話）: 学校侵入事件のコードに“手癖”の一致を発見。
+2. **追跡アーク**（2話）: 畑中との接触、attackers7の輪郭が見え始める。
+3. **対話アーク**（1話）: 父の遺したSIPデバイスへの新しい仮説。
+
+## 第1話の見せ場 / 引き
+侵入コードの解析中、寧が「このコード癖……7年前の年金システム事件と同一パターン」と静かに告げる。蓮の手が止まる。**ラスト1コマ: 蓮、父の遺品のSIPデバイスを握りしめ、「……父さんを壊したやつが、まだこの街にいる」**
+
+## ビジュアル指針（render pipeline 用タグ）
+- style_color: `high-quality manga panel, sharp black ink lines, monochrome, screentone shading, heavy cross-hatching, deep dramatic chiaroscuro, gritty cyberpunk, cold glowing data-center accents`
+- 作画基調: これまでで最も重いトーン。旧データセンターの廃墟感と、蓮の内面の暗さをシンクロさせる。
+- NEG: `low quality, worst quality, blurry, bad anatomy, bad hands, extra fingers, deformed, watermark, color, low contrast, flat shading, washed out, generic anime face`
+"}

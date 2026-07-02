@@ -1,0 +1,964 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>mangaka_full_pipeline_v5 — Tensor Network</title>
+<style>
+  :root {
+    /* canvas */
+    --bg-canvas: #14161b;
+    --grid: rgba(80, 90, 110, 0.16);
+    --grid-major: rgba(110, 125, 150, 0.22);
+    --bg-node: #232733; --bg-node-h: #2c303d; --bg-header: #303544;
+    --bg-control: #1f2733; --bg-control-h: #2a3340;
+    --bg-data: #232733;
+    --bg-score: #2a242a;
+    --border: #3a3f4d; --border-h: #5a6075; --border-active: #f0d050;
+    --txt: #e8e8ea; --txt-dim: #8088a0; --txt-mid: #aab0c0;
+    /* data-type socket colors (ComfyUI-inspired) */
+    --t-usd:    #50b450;  /* green   USD scene / 3D */
+    --t-image:  #f0d050;  /* yellow  Image (RGB) */
+    --t-bw:     #c8c8c8;  /* gray    BW stylized */
+    --t-cnet:   #50c0d0;  /* cyan    ControlNet conditioning */
+    --t-latent: #d050a0;  /* pink    Latent / noise */
+    --t-text:   #ffffff;  /* white   text/prompt */
+    --t-model:  #b070d0;  /* purple  Model / VLM */
+    --t-score:  #e06060;  /* red     QA score */
+    --t-state:  #707888;  /* dim     LangGraph state */
+    --t-ctrl:   #6a728a;  /* dashed gray control flow */
+  }
+  * { box-sizing: border-box; }
+  html, body { background: var(--bg-canvas); color: var(--txt); margin: 0;
+               font: 12px/1.4 -apple-system, "Helvetica Neue", sans-serif;
+               overflow: hidden; height: 100%; }
+
+  /* ── top bar ───────────────────────────────────────────── */
+  .topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+            padding: 8px 16px; background: rgba(20,22,27,0.92);
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid var(--border); display: flex;
+            align-items: center; gap: 18px; flex-wrap: wrap; }
+  .topbar h1 { font-size: 14px; margin: 0; font-weight: 600;
+               font-family: ui-monospace, monospace; color: #fff; }
+  .topbar .sub { color: var(--txt-dim); font-size: 11px;
+                 font-family: ui-monospace, monospace; }
+  .topbar .ctl { display: flex; align-items: center; gap: 8px;
+                 font-size: 11px; color: var(--txt-mid); }
+  .topbar select, .topbar button {
+    background: var(--bg-node); color: var(--txt); border: 1px solid var(--border);
+    border-radius: 4px; padding: 4px 8px; font-size: 11px;
+    font-family: ui-monospace, monospace; cursor: pointer; }
+  .topbar select:hover, .topbar button:hover { background: var(--bg-node-h); }
+  .topbar .legend { display: flex; gap: 12px; flex-wrap: wrap;
+                    font-size: 10px; color: var(--txt-dim); margin-left: auto; }
+  .topbar .legend i { display: inline-block; width: 14px; height: 3px;
+                      vertical-align: middle; margin-right: 4px;
+                      border-radius: 2px; }
+  .topbar .legend.dashed i { height: 0; border-top: 2px dashed; background: none; }
+
+  /* ── layout: sidebar + viewport ──────────────────────────── */
+  .layout { position: absolute; inset: 50px 0 0 0; display: flex; }
+  .sidebar { width: 280px; flex-shrink: 0; background: #14141a;
+             border-right: 1px solid var(--border); overflow-y: auto;
+             padding: 8px 0; font-size: 12px; }
+  .sb-title { padding: 4px 12px 8px; font-size: 10px;
+              text-transform: uppercase; letter-spacing: 0.06em;
+              color: var(--txt-dim); border-bottom: 1px solid var(--border); }
+  .sb-section { padding: 8px 0 4px; }
+  .sb-section-h { padding: 4px 12px; font-size: 9px;
+                   text-transform: uppercase; letter-spacing: 0.06em;
+                   color: var(--yellow); }
+  .sb-item { display: block; padding: 4px 12px; color: var(--txt-dim);
+             text-decoration: none; cursor: pointer; font-size: 11px;
+             white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+             border-left: 2px solid transparent; }
+  .sb-item:hover { background: #1a1a22; color: var(--txt); }
+  .sb-item.active { background: #2a2a33; color: var(--txt);
+                     border-left-color: var(--yellow); }
+  .sb-item .sb-score { font-variant-numeric: tabular-nums;
+                       font-family: ui-monospace, monospace;
+                       font-size: 10px; margin-right: 6px; }
+  .sb-item .sb-tag { font-size: 8px; padding: 1px 4px; background: #3a4960;
+                     color: #a8c8ff; border-radius: 2px;
+                     font-family: ui-monospace, monospace;
+                     margin-left: 4px; }
+
+  /* ── canvas (pan/zoom) ──────────────────────────────────── */
+  .viewport { position: relative; flex: 1; overflow: hidden;
+              cursor: grab;
+              background-image:
+                linear-gradient(var(--grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+                linear-gradient(var(--grid-major) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-major) 1px, transparent 1px);
+              background-size: 24px 24px, 24px 24px, 120px 120px, 120px 120px;
+              background-position: 0 0; }
+  .viewport.dragging { cursor: grabbing; }
+  .world { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+
+  /* ── SVG edges layer ────────────────────────────────────── */
+  svg.edges { position: absolute; left: 0; top: 0; overflow: visible;
+              pointer-events: none; }
+  svg.edges path.edge { fill: none; stroke-width: 2; opacity: 0.85; }
+  svg.edges path.edge.ctrl { stroke-dasharray: 5 4; stroke-width: 1.5;
+                              opacity: 0.55; stroke: var(--t-ctrl); }
+  svg.edges path.edge.cond { stroke-dasharray: 7 4; }
+  svg.edges path.edge:hover { opacity: 1; stroke-width: 3; }
+  svg.edges text.edge-lbl { fill: var(--txt-dim); font: 9px ui-monospace, monospace;
+                             paint-order: stroke; stroke: var(--bg-canvas);
+                             stroke-width: 3; }
+
+  /* ── nodes ──────────────────────────────────────────────── */
+  .node { position: absolute; background: var(--bg-node);
+          border: 1px solid var(--border); border-radius: 8px;
+          overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+          transition: border-color 0.15s, transform 0.15s; }
+  .node:hover { border-color: var(--border-h); }
+  .node.control { background: var(--bg-control); }
+  .node.score { background: var(--bg-score); }
+  .node.active { border-color: var(--border-active); box-shadow:
+       0 0 0 2px rgba(240, 208, 80, 0.25), 0 4px 14px rgba(0,0,0,0.5);
+       animation: pulse 2.2s ease-in-out infinite; }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(240,208,80,0.30), 0 4px 14px rgba(0,0,0,0.5); }
+    50%      { box-shadow: 0 0 0 8px rgba(240,208,80,0.00), 0 4px 14px rgba(0,0,0,0.5); }
+  }
+  .node-h { display: flex; align-items: center; gap: 6px;
+            padding: 5px 10px; background: var(--bg-header);
+            font: 600 11px ui-monospace, monospace; color: var(--txt); }
+  .node.control .node-h { background: #2a3548; }
+  .node-h .badge { font-size: 9px; padding: 1px 5px; border-radius: 3px;
+                   background: var(--border); color: var(--txt-mid);
+                   text-transform: uppercase; letter-spacing: 0.04em;
+                   margin-left: auto; }
+  .node-h .badge.send { background: #3a4a66; color: #87b3ff; }
+  .node-h .badge.cond { background: #4a4030; color: #ffd460; }
+  .node-h .badge.ok   { background: #2a4a2a; color: #50b450; }
+  .node-h .badge.warn { background: #4a3a2a; color: #f0a040; }
+  .node-h .badge.bad  { background: #4a2a2a; color: #e07030; }
+  .node-h .badge.crit { background: #4a2020; color: #c84040; }
+  .node-b { padding: 8px 10px; font-size: 10px; color: var(--txt-mid);
+            line-height: 1.4; font-family: ui-monospace, monospace;
+            word-break: break-word; }
+  .node-img { background: #000; display: block; }
+  .node-img img, .node-img video { display: block; width: 100%;
+                                    height: 100%; object-fit: contain; cursor: pointer; }
+  .placeholder { display: flex; align-items: center; justify-content: center;
+                 color: #4a4f5d; font-size: 10px; font-style: italic;
+                 background: repeating-linear-gradient(45deg,
+                   #1a1d24 0, #1a1d24 6px, #1f222a 6px, #1f222a 12px); }
+  .axes { display: grid; grid-template-columns: 1fr 32px; gap: 1px 6px;
+          margin-top: 4px; font-family: ui-monospace, monospace; }
+  .axes .ax { display: contents; }
+  .axes .ax .n { font-size: 9px; color: var(--txt-mid);
+                 overflow: hidden; text-overflow: ellipsis;
+                 white-space: nowrap; padding: 1px 0; }
+  .axes .ax .v { font-size: 9px; text-align: right;
+                 font-variant-numeric: tabular-nums;
+                 padding: 1px 0; }
+  .axes .bar { grid-column: 1/3; height: 3px; background: #1a1d24;
+               border-radius: 2px; overflow: hidden; margin: 1px 0 3px;
+               position: relative; }
+  .axes .bar > i { position: absolute; left: 0; top: 0; bottom: 0;
+                   border-radius: 2px; }
+
+  /* socket */
+  .sock { position: absolute; width: 10px; height: 10px;
+          border-radius: 50%; border: 2px solid var(--bg-canvas);
+          z-index: 3; transform: translate(-50%, -50%); }
+  .sock-l { left: 0; }
+  .sock-r { left: 100%; }
+  .sock-lbl { position: absolute; font: 9px ui-monospace, monospace;
+              color: var(--txt-dim); white-space: nowrap;
+              pointer-events: none; }
+
+  /* lightbox */
+  .lb { position: fixed; inset: 0; background: rgba(0,0,0,0.96);
+        display: none; align-items: center; justify-content: center; z-index: 200; }
+  .lb.open { display: flex; }
+  .lb img, .lb video { max-width: 95vw; max-height: 95vh; }
+  .lb-close { position: fixed; top: 14px; right: 22px; color: #fff;
+              font-size: 28px; cursor: pointer; user-select: none; }
+  .lb-cap { position: fixed; bottom: 14px; left: 50%;
+            transform: translateX(-50%); color: #aaa; font-size: 11px;
+            font-family: ui-monospace, monospace;
+            background: rgba(0,0,0,0.7); padding: 6px 12px; border-radius: 4px; }
+
+  /* hint */
+  .hint { position: fixed; bottom: 12px; right: 16px; z-index: 50;
+          color: var(--txt-dim); font-size: 10px;
+          font-family: ui-monospace, monospace;
+          background: rgba(20,22,27,0.85); padding: 6px 12px;
+          border: 1px solid var(--border); border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1>mangaka_full_pipeline_v5</h1>
+  <span class="sub" id="sub">loading…</span>
+  <span class="ctl">page
+    <select id="page-sel">
+      <option value="0">p00 — yuto-bedroom</option>
+      <option value="1" selected>p01 — classroom</option>
+      <option value="2">p02 — classroom</option>
+      <option value="3">p03 — city-street</option>
+      <option value="4">p04 — yuto-bedroom</option>
+      <option value="5">p05 — yuto-bedroom</option>
+    </select>
+  </span>
+  <button id="fit">⤧ fit</button>
+  <button id="reset">⟲ reset</button>
+  <div class="legend">
+    <span><i style="background:var(--t-usd)"></i>USD/3D</span>
+    <span><i style="background:var(--t-cnet)"></i>ControlNet</span>
+    <span><i style="background:var(--t-text)"></i>prompt/intent</span>
+    <span><i style="background:var(--t-image)"></i>image</span>
+    <span><i style="background:var(--t-bw)"></i>BW stylized</span>
+    <span><i style="background:var(--t-model)"></i>VLM</span>
+    <span><i style="background:var(--t-score)"></i>score</span>
+    <span class="dashed"><i style="border-color:var(--t-ctrl)"></i>control flow</span>
+  </div>
+</div>
+
+<div class="layout">
+  <aside id="sidebar" class="sidebar">
+    <div class="sb-title">Artifacts</div>
+    <div id="sb-list">loading…</div>
+  </aside>
+  <div class="viewport" id="viewport">
+    <div class="world" id="world">
+      <svg class="edges" id="edges"></svg>
+      <div id="nodes"></div>
+    </div>
+  </div>
+</div>
+
+<div class="hint">drag = pan · wheel = zoom · click image = open</div>
+
+<div class="lb" onclick="this.classList.remove('open')">
+  <div class="lb-close" onclick="event.stopPropagation();document.querySelector('.lb').classList.remove('open')">✕</div>
+  <img id="lbimg" src="" style="display:none">
+  <video id="lbvid" src="" controls style="display:none"></video>
+  <div class="lb-cap" id="lbcap"></div>
+</div>
+
+<script>
+//──────────────────────────────────────────────────────────────────────
+// LangGraph control nodes — strip across the top (mangaka_full_pipeline_v5)
+//──────────────────────────────────────────────────────────────────────
+const CONTROL_NODES = [
+  { id: "c_start",         kind:"control", x:    0, y: 0, w:  90, h: 50, title: "START",         badge: "start" },
+  { id: "c_plan_page",     kind:"control", x:  120, y: 0, w: 140, h: 50, title: "plan_page",     badge: "py"    },
+  { id: "c_enrich_usd",    kind:"control", x:  290, y: 0, w: 140, h: 50, title: "enrich_usd",    badge: "subproc" },
+  { id: "c_render_panel",  kind:"control", x:  460, y: 0, w: 180, h: 50, title: "render_panel",  badge: "send×N" },
+  { id: "c_vision_qa",     kind:"control", x:  670, y: 0, w: 140, h: 50, title: "vision_qa",     badge: "api" },
+  { id: "c_branch",        kind:"control", x:  840, y: 0, w: 160, h: 50, title: "_needs_retry",  badge: "cond" },
+  { id: "c_composite",     kind:"control", x: 1030, y: 0, w: 160, h: 50, title: "composite_page",badge: "py" },
+  { id: "c_otio",          kind:"control", x: 1220, y: 0, w: 130, h: 50, title: "otio_assemble", badge: "subproc" },
+  { id: "c_ffmpeg",        kind:"control", x: 1380, y: 0, w: 130, h: 50, title: "ffmpeg_encode", badge: "subproc" },
+  { id: "c_save",          kind:"control", x: 1540, y: 0, w: 140, h: 50, title: "save_artifact", badge: "py" },
+  { id: "c_end",           kind:"control", x: 1710, y: 0, w:  80, h: 50, title: "END",           badge: "end" },
+];
+// control-flow edges (between control nodes)
+const CONTROL_EDGES = [
+  ["c_start","c_plan_page"], ["c_plan_page","c_enrich_usd"],
+  ["c_enrich_usd","c_render_panel"], ["c_render_panel","c_vision_qa"],
+  ["c_vision_qa","c_branch"],
+  // conditional edges from branch
+  ["c_branch","c_composite", {label:"compose"}],
+  ["c_branch","c_render_panel", {label:"retry ↺", cond: true, curve: "loop"}],
+  ["c_composite","c_otio"], ["c_otio","c_ffmpeg"],
+  ["c_ffmpeg","c_save"], ["c_save","c_end"],
+];
+
+// Scene mapping mirrors SCENE_MAPPING in mangaka_full_pipeline_v5.cljc
+const SCENE_MAP = {
+  0:"yuto-bedroom", 1:"classroom", 2:"classroom", 3:"city-street",
+  4:"yuto-bedroom", 5:"yuto-bedroom", 6:"rens-room", 7:"rens-room",
+  8:"yuto-bedroom", 9:"city-street", 10:"classroom",
+};
+// Ghost-hacker arc-0-1 image-gen-manifest.json synopses (hand-mirrored).
+const PANEL_INTENTS = {
+  0: [
+    { idx: 0, shot: "ELS", emotion: "calm",      char: "yuto" },
+    { idx: 1, shot: "MS",  emotion: "uncertain", char: "yuto" },
+    { idx: 2, shot: "CU",  emotion: "anxious",   char: "yuto" },
+  ],
+  1: [
+    { idx: 0, shot: "ELS", emotion: "neutral", char: "yuto" },
+    { idx: 1, shot: "MS",  emotion: "neutral", char: "nei"  },
+    { idx: 2, shot: "OTS", emotion: "curious", char: "nei"  },
+    { idx: 3, shot: "CU",  emotion: "shocked", char: "yuto" },
+    { idx: 4, shot: "MS",  emotion: "calm",    char: "akira"},
+    { idx: 5, shot: "ECU", emotion: "tense",   char: "yuto" },
+  ],
+  2: [
+    { idx: 0, shot: "LS",  emotion: "neutral", char: "yuto" },
+    { idx: 1, shot: "MS",  emotion: "tense",   char: "yuto" },
+    { idx: 2, shot: "CU",  emotion: "anxious", char: "yuto" },
+    { idx: 3, shot: "MS",  emotion: "calm",    char: "nei"  },
+  ],
+  3: [
+    { idx: 0, shot: "ELS", emotion: "neutral", char: null },
+    { idx: 1, shot: "LS",  emotion: "tense",   char: "yuto" },
+    { idx: 2, shot: "CU",  emotion: "anxious", char: "yuto" },
+  ],
+  4: [
+    { idx: 0, shot: "MS",  emotion: "tired",    char: "yuto" },
+    { idx: 1, shot: "CU",  emotion: "exhausted",char: "yuto" },
+  ],
+  5: [
+    { idx: 0, shot: "MS",  emotion: "uncertain", char: "yuto" },
+    { idx: 1, shot: "CU",  emotion: "determined",char: "yuto" },
+    { idx: 2, shot: "ECU", emotion: "shocked",   char: "yuto" },
+  ],
+};
+
+// Pre-rendered ControlNet conditioning images on disk (shared per scene).
+const CNET_PER_SCENE = {
+  "yuto-bedroom": {
+    canny:   "yuto-bedroom-yuto_at_desk-canny.png",
+    openpose:"yuto-bedroom-yuto_at_desk-openpose.png",
+  },
+  "classroom":   { canny: "classroom-student_pov-canny.png" },
+  "city-street": { canny: "city-street-wide_perspective-canny.png" },
+  "rens-room":   { canny: "rens-room-ren_at_desk-canny.png" },
+};
+const SCENE_USDA_REF = {
+  "yuto-bedroom": { thumb: "v5-blender-workbench-yuto-bedroom.png" },
+  "classroom":    { thumb: null },
+  "city-street":  { thumb: null },
+  "rens-room":    { thumb: null },
+};
+
+// "is currently running" indicator → driven by the most-recently produced
+// artifact's node id. mangaka_full_pipeline_v5 saves to /tmp; here we pick
+// from manifest mtime.
+const ARTIFACT_TO_NODE = (file) => {
+  if (/^gh-arc0-1-v5plus-p\d+-scored\./i.test(file)) return "c_save";
+  if (/^gh-arc0-1-v5plus-p\d+-score\.json$/i.test(file)) return "c_vision_qa";
+  if (/^v5-stylized-pg\d+-p\d+-bw\./i.test(file))    return "c_render_panel";
+  if (/^gh-arc0-1-v5-p\d+(-scored)?\./i.test(file))  return "c_composite";
+  if (/-canny\.png$/i.test(file))                     return "c_enrich_usd";
+  if (/motion-comic.*\.mp4$/i.test(file))             return "c_ffmpeg";
+  return null;
+};
+
+//──────────────────────────────────────────────────────────────────────
+// Per-page tensor graph builder
+//──────────────────────────────────────────────────────────────────────
+function buildPageGraph(pageNum, allItems) {
+  const scene = SCENE_MAP[pageNum] || "yuto-bedroom";
+  const intents = PANEL_INTENTS[pageNum] || [];
+  const cnet = CNET_PER_SCENE[scene] || {};
+  const usdRef = SCENE_USDA_REF[scene] || {};
+  // Find the per-page stylized BW panels in manifest (page 1 has the most).
+  // file pattern: v5-stylized-pg{P}-p{IDX}-bw.png — pg is 1-based.
+  const pg = pageNum + 1;
+  const findStylizedBW = (idx) => {
+    const candidates = allItems.filter(it =>
+      new RegExp(`^v5-stylized-pg0?${pg}-p0?${idx + 1}-bw\\.png$`, "i").test(it.file));
+    return candidates[0] || null;
+  };
+  const composite = allItems.find(it =>
+    new RegExp(`^gh-arc0-1-v5plus-p0?${pageNum}-scored\\.png$`, "i").test(it.file));
+  const compositeBase = allItems.find(it =>
+    new RegExp(`^gh-arc0-1-v5-p0?${pageNum}(-scored)?\\.png$`, "i").test(it.file));
+  const score = composite?.score || null;
+
+  // Layout constants
+  const COL = {
+    USD: 0, INTENT: 320, CNET: 600, RENDER: 880, BW: 1160,
+    COMPOSITE: 1440, VISION: 1740, FINAL: 2000,
+  };
+  const TOP = 110;
+  const ROW = 200;  // per panel row
+  const nodes = [];
+  const edges = [];
+
+  // ── Col 0: USD scene + style packs ───────────────────────────────
+  nodes.push({
+    id: "n_usd", kind: "data", x: COL.USD, y: TOP, w: 240, h: 200,
+    title: `usd_scene · ${scene}`, badge: "USD",
+    file: usdRef.thumb, fileLabel: usdRef.thumb ? "blender workbench preview" : null,
+    sub: `data/ghosthacker/resources/usd/${scene}.usda\nenriched per page (customData.currentPanel,emotion,beat)`,
+    outputs: [
+      { id: "usd_out", name: "scene", color: "var(--t-usd)" },
+    ],
+  });
+  nodes.push({
+    id: "n_style", kind: "data", x: COL.USD, y: TOP + 230, w: 240, h: 110,
+    title: "MaterialX + OSL", badge: "shaders",
+    sub: "materials/manga-ink.mtlx\nosl/manga_*.osl  (NPR ink shader)",
+    outputs: [
+      { id: "style_out", name: "shaders", color: "var(--t-usd)" },
+    ],
+  });
+  nodes.push({
+    id: "n_vlm", kind: "data", x: COL.USD, y: TOP + 360, w: 240, h: 100,
+    title: "gemma3:4b  (Ollama)", badge: "VLM",
+    sub: "vision_qa.score_page() ↦\n  13-axis heuristic + 6-axis Jump-tier score",
+    outputs: [
+      { id: "vlm_out", name: "model", color: "var(--t-model)" },
+    ],
+  });
+
+  // ── Col 1: per-panel intent (from manifest) ──────────────────────
+  intents.forEach((p, i) => {
+    nodes.push({
+      id: `n_intent_${i}`, kind: "data", x: COL.INTENT, y: TOP + i * ROW,
+      w: 220, h: 110,
+      title: `panel_intent[${p.idx}]`, badge: "TEXT",
+      sub: `shot=${p.shot}\nemotion=${p.emotion}\nchar=${p.char ?? "—"}`,
+      inputs: [
+        { id: "in", name: "page", color: "var(--t-state)" },
+      ],
+      outputs: [
+        { id: "out", name: "intent", color: "var(--t-text)" },
+      ],
+    });
+  });
+
+  // ── Col 2: ControlNet conditioning per panel ─────────────────────
+  intents.forEach((p, i) => {
+    const items = [];
+    if (cnet.canny)    items.push({ kind: "canny",    file: cnet.canny });
+    if (cnet.openpose) items.push({ kind: "openpose", file: cnet.openpose });
+    const file = items[0]?.file || null;
+    const sub = items.length
+      ? items.map(c => `${c.kind}: ${c.file}`).join("\n")
+      : `(no conditioning prebaked for ${scene})\nrender_panel will fall back to text-only`;
+    nodes.push({
+      id: `n_cnet_${i}`, kind: "data", x: COL.CNET, y: TOP + i * ROW,
+      w: 230, h: 170,
+      title: `controlnet[${p.idx}]`, badge: "C-NET",
+      file, fileLabel: items[0]?.kind || null,
+      sub,
+      inputs: [
+        { id: "scene_in",  name: "scene",   color: "var(--t-usd)" },
+        { id: "intent_in", name: "intent",  color: "var(--t-text)" },
+      ],
+      outputs: [
+        { id: "out", name: "cond", color: "var(--t-cnet)" },
+      ],
+    });
+  });
+
+  // ── Col 3: render_panel (Blender Cycles+OSL or ComfyUI fallback)
+  intents.forEach((p, i) => {
+    nodes.push({
+      id: `n_render_${i}`, kind: "data", x: COL.RENDER, y: TOP + i * ROW,
+      w: 240, h: 180,
+      title: `render_panel[${p.idx}]`, badge: "SEND",
+      file: null,
+      placeholder: "blender Cycles\n→ /tmp/v5-panel-p…",
+      sub: `seed_offset=${0}\n→ /tmp/v5-panel-pN-pX.png\n(intermediate; not in gallery)`,
+      inputs: [
+        { id: "scene_in", name: "scene",    color: "var(--t-usd)" },
+        { id: "cnet_in",  name: "cond",     color: "var(--t-cnet)" },
+        { id: "style_in", name: "shaders",  color: "var(--t-usd)" },
+      ],
+      outputs: [
+        { id: "out", name: "render", color: "var(--t-image)" },
+      ],
+    });
+  });
+
+  // ── Col 4: BW stylized (per-panel artifact actually on disk) ─────
+  intents.forEach((p, i) => {
+    const bw = findStylizedBW(p.idx);
+    nodes.push({
+      id: `n_bw_${i}`, kind: "data", x: COL.BW, y: TOP + i * ROW,
+      w: 240, h: 200,
+      title: `stylized_bw[${p.idx}]`, badge: "BW",
+      file: bw?.file || null,
+      mtime: bw?.mtime,
+      fileLabel: bw ? "v5-stylized-pg…-bw.png" : null,
+      sub: bw ? null : "(no bw for this page in /img)",
+      inputs: [
+        { id: "render_in", name: "render", color: "var(--t-image)" },
+      ],
+      outputs: [
+        { id: "out", name: "panel", color: "var(--t-bw)" },
+      ],
+    });
+  });
+
+  // ── Col 5: composite_page  (single, spans rows) ──────────────────
+  const compH = Math.max(220, intents.length * ROW - 30);
+  const compY = TOP + (intents.length * ROW - compH) / 2;
+  nodes.push({
+    id: "n_comp", kind: "data", x: COL.COMPOSITE, y: compY, w: 270, h: compH,
+    title: "composite_page", badge: "JOIN",
+    file: compositeBase?.file || composite?.file || null,
+    mtime: (compositeBase || composite)?.mtime,
+    fileLabel: "1280×1817 PIL grid",
+    sub: "PIL grid composite\n(black borders, top→bottom)",
+    inputs: intents.map((p, i) => ({
+      id: `p_in_${i}`, name: `p${p.idx}`, color: "var(--t-bw)",
+    })),
+    outputs: [
+      { id: "out", name: "page", color: "var(--t-image)" },
+    ],
+  });
+
+  // ── Col 6: vision_qa (single) ────────────────────────────────────
+  nodes.push({
+    id: "n_qa", kind: "score", x: COL.VISION, y: compY, w: 280, h: compH,
+    title: "vision_qa", badge: score ? scoreBadgeClass(score.total) : "api",
+    score,
+    sub: score ? null : "no score JSON found for this page",
+    inputs: [
+      { id: "page_in", name: "page",  color: "var(--t-image)" },
+      { id: "model_in", name: "VLM",  color: "var(--t-model)" },
+    ],
+    outputs: [
+      { id: "out", name: "score", color: "var(--t-score)" },
+    ],
+  });
+
+  // ── Col 7: final scored artifact ─────────────────────────────────
+  nodes.push({
+    id: "n_final", kind: "data", x: COL.FINAL, y: compY,
+    w: 280, h: compH,
+    title: "save_artifact (final)", badge: "ARTIFACT",
+    file: composite?.file || null,
+    mtime: composite?.mtime,
+    fileLabel: composite?.file,
+    sub: composite ? null : "(no scored composite for this page)",
+    inputs: [
+      { id: "comp_in",  name: "page",  color: "var(--t-image)" },
+      { id: "score_in", name: "score", color: "var(--t-score)" },
+    ],
+  });
+
+  // ── DATA EDGES (tensor flow) ─────────────────────────────────────
+  intents.forEach((p, i) => {
+    edges.push(["n_usd",          "usd_out",   `n_cnet_${i}`,   "scene_in"]);
+    edges.push(["n_usd",          "usd_out",   `n_render_${i}`, "scene_in"]);
+    edges.push(["n_style",        "style_out", `n_render_${i}`, "style_in"]);
+    edges.push([`n_intent_${i}`,  "out",       `n_cnet_${i}`,   "intent_in"]);
+    edges.push([`n_cnet_${i}`,    "out",       `n_render_${i}`, "cnet_in"]);
+    edges.push([`n_render_${i}`,  "out",       `n_bw_${i}`,     "render_in"]);
+    edges.push([`n_bw_${i}`,      "out",       "n_comp",        `p_in_${i}`]);
+  });
+  edges.push(["n_comp",  "out", "n_qa",    "page_in"]);
+  edges.push(["n_vlm",   "vlm_out", "n_qa", "model_in"]);
+  edges.push(["n_comp",  "out", "n_final", "comp_in"]);
+  edges.push(["n_qa",    "out", "n_final", "score_in"]);
+
+  // ── CONTROL EDGES (LangGraph node → produced data node) ─────────
+  const ctrlEdges = [
+    ["c_plan_page",    intents.map((_, i) => `n_intent_${i}`)],
+    ["c_enrich_usd",   ["n_usd"]],
+    ["c_render_panel", intents.flatMap((_, i) => [`n_render_${i}`, `n_bw_${i}`])],
+    ["c_composite",    ["n_comp"]],
+    ["c_vision_qa",    ["n_qa"]],
+    ["c_save",         ["n_final"]],
+  ];
+
+  return { nodes, edges, ctrlEdges, score };
+}
+
+function scoreBadgeClass(t) {
+  if (t >= 78) return "ok";
+  if (t >= 65) return "ok";
+  if (t >= 50) return "warn";
+  if (t >= 35) return "bad";
+  return "crit";
+}
+function scoreColor(v) { return v >= 7 ? "var(--t-usd)" : v >= 4 ? "#d8a830" : "var(--t-score)"; }
+
+//──────────────────────────────────────────────────────────────────────
+// Renderers
+//──────────────────────────────────────────────────────────────────────
+function escapeHtml(s) {
+  return String(s ?? "").replace(/[&<>"']/g, c =>
+    ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+window.openLB = function (kind, src, cap) {
+  const lb = document.querySelector(".lb");
+  const img = document.getElementById("lbimg");
+  const vid = document.getElementById("lbvid");
+  if (kind === "video") {
+    img.style.display = "none";
+    vid.style.display = "block"; vid.src = src;
+  } else {
+    vid.style.display = "none"; vid.pause();
+    img.style.display = "block"; img.src = src;
+  }
+  document.getElementById("lbcap").textContent = cap || "";
+  lb.classList.add("open");
+};
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") document.querySelector(".lb").classList.remove("open");
+});
+
+function renderNode(n, activeId) {
+  const cls = ["node", n.kind || "data"];
+  if (n.id === activeId) cls.push("active");
+  const badgeCls = n.badge && /^(send|cond|ok|warn|bad|crit)$/.test(n.badge)
+    ? n.badge : "";
+  const inputs = (n.inputs || []).map((s, i, arr) => {
+    const y = 32 + (i + 1) * (n.h - 32) / (arr.length + 1);
+    return `<span class="sock sock-l" style="top:${y}px;background:${s.color};border-color:var(--bg-node);"></span>
+            <span class="sock-lbl" style="left:14px;top:${y - 14}px;">${escapeHtml(s.name)}</span>`;
+  }).join("");
+  const outputs = (n.outputs || []).map((s, i, arr) => {
+    const y = 32 + (i + 1) * (n.h - 32) / (arr.length + 1);
+    return `<span class="sock sock-r" style="top:${y}px;background:${s.color};border-color:var(--bg-node);"></span>
+            <span class="sock-lbl" style="right:14px;top:${y - 14}px;text-align:right;transform:translateX(0);">${escapeHtml(s.name)}</span>`;
+  }).join("");
+  let body = "";
+  // image / placeholder
+  if (n.file) {
+    const isVideo = /\.mp4$/i.test(n.file);
+    const imgH = n.h - 32 - (n.sub ? 36 : 0) - (n.fileLabel ? 14 : 0);
+    body += `<div class="node-img" style="height:${imgH}px;"
+                  onclick="openLB('${isVideo ? "video" : "image"}','img/${escapeHtml(n.file)}','${escapeHtml(n.file)}')">
+      ${isVideo
+        ? `<video src="img/${escapeHtml(n.file)}" muted preload="metadata"></video>`
+        : `<img src="img/${escapeHtml(n.file)}" loading="lazy">`}
+    </div>`;
+    if (n.fileLabel) {
+      body += `<div class="node-b" style="padding:3px 10px;font-size:9px;color:var(--txt-dim);">${escapeHtml(n.fileLabel)}</div>`;
+    }
+  } else if (n.placeholder) {
+    const imgH = n.h - 32 - (n.sub ? 36 : 0);
+    body += `<div class="node-img placeholder" style="height:${imgH}px;white-space:pre-line;text-align:center;">${escapeHtml(n.placeholder)}</div>`;
+  }
+  if (n.score) {
+    const s = n.score, c = scoreColor(s.total / 10);
+    const versionTag = s.version_tag || "?";
+    const renderedAt = s.version?.rendered_at;
+    const ageStr = renderedAt
+      ? new Date(renderedAt * 1000).toISOString().slice(5, 16).replace("T", " ")
+      : "?";
+    const timeStr = s.timings_total_s ? `${Math.round(s.timings_total_s)}s` : "?";
+    body += `<div class="node-b" style="padding:6px 10px;">
+      <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:4px;">
+        <span style="font-size:20px;font-weight:700;color:${tierColorTotal(s.total)};font-variant-numeric:tabular-nums;">${s.total.toFixed(1)}</span>
+        <span style="font-size:10px;color:var(--txt-dim);">/100</span>
+        <span style="font-size:10px;color:var(--txt-mid);">${escapeHtml(s.label || "")}</span>
+      </div>
+      <div style="display:flex;gap:5px;margin-bottom:5px;flex-wrap:wrap;">
+        <span style="font-size:9px;padding:1px 6px;background:#3a4960;color:#a8c8ff;
+                      border-radius:3px;font-family:ui-monospace,monospace;">
+          ${escapeHtml(versionTag)}
+        </span>
+        <span style="font-size:9px;padding:1px 6px;background:#3a3a3f;color:#aaa;
+                      border-radius:3px;font-family:ui-monospace,monospace;">${ageStr}</span>
+        <span style="font-size:9px;padding:1px 6px;background:#3a3a3f;color:#aaa;
+                      border-radius:3px;font-family:ui-monospace,monospace;">${timeStr}</span>
+      </div>
+      <div class="axes">${renderAxes(s.scores)}</div>
+    </div>`;
+  }
+  if (n.sub) {
+    body += `<div class="node-b" style="white-space:pre-line;">${escapeHtml(n.sub)}</div>`;
+  }
+  return `<div class="${cls.join(" ")}" id="${n.id}" data-id="${n.id}"
+               style="left:${n.x}px;top:${n.y}px;width:${n.w}px;height:${n.h}px;">
+    <div class="node-h">${escapeHtml(n.title)}${n.badge
+      ? `<span class="badge ${badgeCls}">${escapeHtml(n.badge)}</span>`
+      : ""}</div>
+    ${body}
+    ${inputs}${outputs}
+  </div>`;
+}
+function tierColorTotal(t) {
+  if (t >= 78) return "var(--t-usd)";
+  if (t >= 65) return "#80c050";
+  if (t >= 50) return "#f0a040";
+  if (t >= 35) return "#e07030";
+  return "var(--t-score)";
+}
+function renderAxes(scores) {
+  if (!scores) return "";
+  const keys = ["character_visible","scene_continuity","panel_diversity",
+    "inking_quality","composition_bimodal","background_white",
+    "bubble_legibility","emotional_impact","artifact_freedom",
+    "silhouette_clarity","panel_coherence","wasted_lines"];
+  return keys.filter(k => k in scores).map(k => {
+    const v = +scores[k] || 0;
+    const c = v >= 7 ? "#50b450" : v >= 4 ? "#d8a830" : "#c84040";
+    return `<div class="ax">
+      <span class="n" title="${escapeHtml(k)}: ${v}">${escapeHtml(k.replace(/_/g, " "))}</span>
+      <span class="v" style="color:${c}">${v}</span>
+    </div>
+    <div class="bar"><i style="width:${Math.min(100, v * 10)}%;background:${c};"></i></div>`;
+  }).join("");
+}
+
+//──────────────────────────────────────────────────────────────────────
+// Edge rendering — bezier between socket world-coords
+//──────────────────────────────────────────────────────────────────────
+function nodeSocketPos(node, sockId, side) {
+  const list = side === "in" ? (node.inputs || []) : (node.outputs || []);
+  const i = list.findIndex(s => s.id === sockId);
+  if (i < 0) return { x: side === "in" ? node.x : node.x + node.w, y: node.y + node.h / 2 };
+  const y = node.y + 32 + (i + 1) * (node.h - 32) / (list.length + 1);
+  const x = side === "in" ? node.x : node.x + node.w;
+  return { x, y };
+}
+function bezierPath(p1, p2, opts = {}) {
+  const dx = Math.max(40, Math.abs(p2.x - p1.x) * 0.5);
+  if (opts.loop) {
+    // Loop back: arc up and over
+    const top = Math.min(p1.y, p2.y) - 80;
+    return `M ${p1.x} ${p1.y} C ${p1.x + 120} ${top}, ${p2.x - 120} ${top}, ${p2.x} ${p2.y}`;
+  }
+  return `M ${p1.x} ${p1.y} C ${p1.x + dx} ${p1.y}, ${p2.x - dx} ${p2.y}, ${p2.x} ${p2.y}`;
+}
+
+function renderEdges(nodes, dataEdges, ctrlEdges, ctrlNodeEdges) {
+  const byId = Object.fromEntries(nodes.map(n => [n.id, n]));
+  const paths = [];
+
+  // 1. control flow inside LangGraph strip (between control nodes)
+  for (const e of ctrlNodeEdges) {
+    const [a, b, opts] = e;
+    const na = byId[a], nb = byId[b];
+    if (!na || !nb) continue;
+    const p1 = { x: na.x + na.w, y: na.y + na.h / 2 };
+    const p2 = { x: nb.x, y: nb.y + nb.h / 2 };
+    const loop = opts?.curve === "loop";
+    const d = bezierPath(p1, p2, { loop });
+    const lbl = opts?.label
+      ? `<text class="edge-lbl" x="${(p1.x + p2.x) / 2}" y="${loop ? Math.min(p1.y, p2.y) - 65 : (p1.y + p2.y) / 2 - 6}" text-anchor="middle">${escapeHtml(opts.label)}</text>`
+      : "";
+    const klass = opts?.cond ? "edge ctrl cond" : "edge ctrl";
+    paths.push(`<path class="${klass}" d="${d}" />${lbl}`);
+  }
+
+  // 2. data flow tensor edges
+  for (const [aId, aSock, bId, bSock] of dataEdges) {
+    const na = byId[aId], nb = byId[bId];
+    if (!na || !nb) continue;
+    const p1 = nodeSocketPos(na, aSock, "out");
+    const p2 = nodeSocketPos(nb, bSock, "in");
+    const outSock = (na.outputs || []).find(s => s.id === aSock);
+    const color = outSock?.color || "var(--txt-dim)";
+    const d = bezierPath(p1, p2);
+    paths.push(`<path class="edge" d="${d}" stroke="${color}" />`);
+  }
+
+  // 3. control → data edges (dashed, very faint)
+  for (const [ctrlId, dataIds] of ctrlEdges) {
+    const nc = byId[ctrlId];
+    if (!nc) continue;
+    for (const dId of dataIds) {
+      const nd = byId[dId];
+      if (!nd) continue;
+      const p1 = { x: nc.x + nc.w / 2, y: nc.y + nc.h };
+      const p2 = { x: nd.x + nd.w / 2, y: nd.y };
+      const dx = 0, dy = Math.abs(p2.y - p1.y) * 0.4;
+      const d = `M ${p1.x} ${p1.y} C ${p1.x + dx} ${p1.y + dy}, ${p2.x - dx} ${p2.y - dy}, ${p2.x} ${p2.y}`;
+      paths.push(`<path class="edge ctrl" d="${d}" />`);
+    }
+  }
+
+  return paths.join("\n");
+}
+
+//──────────────────────────────────────────────────────────────────────
+// Pan / zoom
+//──────────────────────────────────────────────────────────────────────
+const state = { scale: 0.7, tx: 40, ty: 40 };
+function applyTransform() {
+  document.getElementById("world").style.transform =
+    `translate(${state.tx}px, ${state.ty}px) scale(${state.scale})`;
+}
+function fitToScreen(bbox) {
+  const vp = document.getElementById("viewport");
+  const w = vp.clientWidth, h = vp.clientHeight;
+  const margin = 40;
+  const sx = (w - 2 * margin) / bbox.w;
+  const sy = (h - 2 * margin) / bbox.h;
+  state.scale = Math.min(sx, sy, 1);
+  state.tx = margin - bbox.x * state.scale;
+  state.ty = margin - bbox.y * state.scale;
+  applyTransform();
+}
+(function attachPanZoom() {
+  const vp = document.getElementById("viewport");
+  let dragging = false, ox = 0, oy = 0;
+  vp.addEventListener("mousedown", e => {
+    if (e.target.closest(".node-img, .sock, button, select, a")) return;
+    dragging = true; vp.classList.add("dragging");
+    ox = e.clientX - state.tx; oy = e.clientY - state.ty;
+    e.preventDefault();
+  });
+  window.addEventListener("mousemove", e => {
+    if (!dragging) return;
+    state.tx = e.clientX - ox; state.ty = e.clientY - oy;
+    applyTransform();
+  });
+  window.addEventListener("mouseup", () => { dragging = false; vp.classList.remove("dragging"); });
+  vp.addEventListener("wheel", e => {
+    e.preventDefault();
+    const rect = vp.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    const wx = (mx - state.tx) / state.scale;
+    const wy = (my - state.ty) / state.scale;
+    const f = e.deltaY < 0 ? 1.1 : 1 / 1.1;
+    state.scale = Math.max(0.15, Math.min(3, state.scale * f));
+    state.tx = mx - wx * state.scale;
+    state.ty = my - wy * state.scale;
+    applyTransform();
+  }, { passive: false });
+})();
+
+//──────────────────────────────────────────────────────────────────────
+// Main render
+//──────────────────────────────────────────────────────────────────────
+let manifest = null;
+async function loadManifest() {
+  const r = await fetch("manifest.json?" + Date.now());
+  manifest = await r.json();
+  renderSidebar();
+}
+
+function renderSidebar() {
+  if (!manifest) return;
+  const sections = manifest.sections || {};
+  const sectionOrder = [
+    ["v5plus_final",   "★ v5+ final"],
+    ["v5plus_panels",  "v5+ panels"],
+    ["motion_comic",   "motion comic"],
+    ["v5_baseline",    "v5 baseline"],
+    ["v4",             "v4"],
+    ["older",          "older"],
+  ];
+  let html = "";
+  for (const [key, label] of sectionOrder) {
+    const items = sections[key] || [];
+    if (!items.length) continue;
+    html += `<div class="sb-section">
+      <div class="sb-section-h">${label} (${items.length})</div>`;
+    for (const it of items.slice(0, 30)) {
+      const m = it.file.match(/p(\d+)/);
+      const pageNum = m ? parseInt(m[1], 10) : null;
+      const s = it.score;
+      const scoreS = s ? `<span class="sb-score" style="color:${tierColorTotal(s.total)}">${s.total.toFixed(0)}</span>` : "";
+      const tagS = s?.version_tag ? `<span class="sb-tag">${escapeHtml(s.version_tag)}</span>` : "";
+      const id = pageNum !== null ? `#p${String(pageNum).padStart(2,"0")}` : `#a/${encodeURIComponent(it.file)}`;
+      html += `<a class="sb-item" href="${id}" data-page="${pageNum ?? ""}"
+                  data-file="${escapeHtml(it.file)}">
+        ${scoreS}${escapeHtml(it.file.replace(/^gh-arc0-1-/, "").replace(/-scored\.png$/, ""))}${tagS}
+      </a>`;
+    }
+    html += `</div>`;
+  }
+  document.getElementById("sb-list").innerHTML = html;
+}
+
+function updateSidebarActive(pageNum) {
+  document.querySelectorAll(".sb-item").forEach(a => {
+    a.classList.toggle("active", a.dataset.page === String(pageNum));
+  });
+}
+function flatItems() {
+  if (!manifest) return [];
+  return Object.values(manifest.sections || {}).flat();
+}
+function latestActiveControlNodeId() {
+  // The most recently modified artifact's owning control node = "active".
+  const items = flatItems();
+  if (!items.length) return null;
+  let best = null, bestT = -1;
+  for (const it of items) {
+    const nodeId = ARTIFACT_TO_NODE(it.file);
+    if (!nodeId) continue;
+    if (it.mtime > bestT) { bestT = it.mtime; best = nodeId; }
+  }
+  return best;
+}
+function renderAll(pageNum) {
+  updateSidebarActive(pageNum);
+  const items = flatItems();
+  const { nodes, edges, ctrlEdges } = buildPageGraph(pageNum, items);
+
+  const allNodes = [...CONTROL_NODES, ...nodes];
+  const activeId = latestActiveControlNodeId();
+
+  // bbox
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  for (const n of allNodes) {
+    minX = Math.min(minX, n.x); minY = Math.min(minY, n.y);
+    maxX = Math.max(maxX, n.x + n.w); maxY = Math.max(maxY, n.y + n.h);
+  }
+  const bbox = { x: minX, y: minY, w: maxX - minX, h: maxY - minY };
+
+  // size the SVG to encompass the world
+  const svg = document.getElementById("edges");
+  svg.setAttribute("width", maxX + 200);
+  svg.setAttribute("height", maxY + 200);
+  svg.innerHTML = renderEdges(allNodes, edges, ctrlEdges, CONTROL_EDGES);
+
+  document.getElementById("nodes").innerHTML =
+    allNodes.map(n => renderNode(n, activeId)).join("");
+
+  // Build header sub with score + version of CURRENT page
+  // (extract from the vision_qa node that buildPageGraph just produced)
+  let scoreInfo = "";
+  const qaNode = nodes.find(n => n.id === "n_qa");
+  const score = qaNode?.score || null;
+  if (score) {
+    const tag = score.version_tag || "?";
+    const t = score.timings_total_s ? `${Math.round(score.timings_total_s)}s` : "?";
+    scoreInfo = ` · ${score.total.toFixed(1)}/100 ${score.label || ""} [${tag}] [${t}]`;
+  }
+  document.getElementById("sub").innerHTML =
+    `${flatItems().length} artifacts · <strong>page p${String(pageNum).padStart(2,"0")}</strong> ` +
+    `(${SCENE_MAP[pageNum] || "?"})${scoreInfo} · active=${activeId || "—"}`;
+
+  fitToScreen(bbox);
+}
+
+// ── URL hash routing ── allows deep-link to a page (e.g. #p03)
+function getPageFromHash() {
+  const m = location.hash.match(/^#p(\d+)/);
+  return m ? parseInt(m[1], 10) : null;
+}
+function setPageInHash(pageNum) {
+  const tag = `#p${String(pageNum).padStart(2, "0")}`;
+  if (location.hash !== tag) {
+    history.replaceState(null, "", tag);
+  }
+  document.title = `mangaka — page p${String(pageNum).padStart(2,"0")} (${SCENE_MAP[pageNum] || "?"})`;
+}
+
+(async function init() {
+  await loadManifest();
+  const sel = document.getElementById("page-sel");
+
+  // Initial page from URL hash (default p01)
+  const initialPage = getPageFromHash();
+  if (initialPage !== null && initialPage >= 0 && initialPage <= 5) {
+    sel.value = String(initialPage);
+  }
+
+  function navigate(pageNum) {
+    sel.value = String(pageNum);
+    setPageInHash(pageNum);
+    renderAll(pageNum);
+  }
+
+  sel.addEventListener("change", () => navigate(+sel.value));
+  document.getElementById("fit").addEventListener("click", () => renderAll(+sel.value));
+  document.getElementById("reset").addEventListener("click", () => {
+    state.scale = 1; state.tx = 0; state.ty = 0; applyTransform();
+  });
+  // Back/forward navigation
+  window.addEventListener("hashchange", () => {
+    const p = getPageFromHash();
+    if (p !== null && +sel.value !== p) navigate(p);
+  });
+
+  navigate(+sel.value);
+})();
+</script>
+</body>
+</html>

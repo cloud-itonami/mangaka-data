@@ -1,0 +1,20 @@
+{
+  "scores": {
+    "garbage_gate_v_over_h": 1.08,
+    "garbage_gate_stripe_pct": 0.886
+  },
+  "total": 5.0,
+  "jump_tier_label": "AI artifact (garbage gate)",
+  "heuristic_total": 5.0,
+  "issues": [
+    "[GARBAGE GATE] v/h edge=1.08 stripe_pct=89%",
+    "Image is mostly uniform horizontal stripe pattern",
+    "Obata posterize destroyed SDXL background detail",
+    "Re-render with v6 path + reduced Obata after ComfyUI recovery"
+  ],
+  "_diagnostics": {
+    "garbage_detected": true,
+    "v_over_h_edge_ratio": 1.0805625606912177,
+    "stripe_row_pct": 0.8860132158590308
+  }
+}
