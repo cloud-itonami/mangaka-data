@@ -1,1 +1,1 @@
-4479dbeb-9a86-4957-8ecb-e5355749a941 bucket=gftdcojp-m365-annex chunk=50MiB datacenter=US encryption=none fileprefix=mangaka-data/ host=s3.us-west-004.backblazeb2.com name=b2 port=443 protocol=https signature=v4 storageclass=STANDARD type=S3 timestamp=1782986860s
+4479dbeb-9a86-4957-8ecb-e5355749a941 bucket=gftdcojp-m365-annex chunk=50MiB datacenter=US encryption=none fileprefix=mangaka-data/ host=s3.us-west-004.backblazeb2.com name=b2 port=443 protocol=https signature=v4 storageclass=STANDARD type=S3 timestamp=1784254804s
