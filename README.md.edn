@@ -1,0 +1,5 @@
+[{:db/id -1
+  :readme/name "mangaka-data"
+  :readme/summary "Datalad-owned data boundary for ai-gftd-mangaka."
+  :readme/canonical-path "orgs/gftdcojp/mangaka-data"
+  :readme/migration "MIGRATION.edn"}]

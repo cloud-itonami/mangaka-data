@@ -1,0 +1,24 @@
+{:migration/id :gftdcojp/mangaka-data-authoritative-recovery
+ :migration/status :complete
+ :migration/source
+ {:repository "gftdcojp/ai-gftd-apps-gftdcojp"
+  :revision "aa7b554"
+  :path "60-apps/ai-gftd-project-mangaka/data"
+  :entry-count 184}
+ :migration/path-mapping
+ {"ghosthacker-shiropico" "ghosthacker"}
+ :migration/before {:git-blob-matched 30
+                    :datalad-represented-or-divergent 49
+                    :missing-path 105}
+ :migration/action
+ {:missing-restored 105
+  :divergent-policy :preserve-current-datalad-version
+  :embedded-code-repository-copy false}
+ :migration/after
+ {:path-present 184
+  :missing-path 0
+  :content-verified-matched 135
+  :content-divergent-preserved 5
+  :annex-content-unavailable 44}
+ :migration/storage :datalad
+ :migration/document-format :edn}
