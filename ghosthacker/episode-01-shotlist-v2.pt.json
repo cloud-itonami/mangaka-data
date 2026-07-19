@@ -1,0 +1,432 @@
+[
+  {
+    "type": "scene",
+    "scene_key": "dubai-aerial-night",
+    "scene_prompt": "Anime cinematic aerial establishing shot of a futuristic cyber Dubai at night, teal neon skyscrapers, glowing data particles drifting between towers, calm peaceful skyline, no on-screen text",
+    "sfx": "ambient",
+    "fx": null,
+    "dur": 3.5
+  },
+  {
+    "type": "scene",
+    "scene_key": "traffic-signals-red-flash",
+    "scene_prompt": "Anime shot of a city intersection at night where every traffic signal suddenly flashes red in unison, eerie crimson glow flooding teal streets, sense of alarm, no on-screen text",
+    "sfx": "alarm",
+    "fx": "flash",
+    "dur": 2.5
+  },
+  {
+    "type": "scene",
+    "scene_key": "cars-falling-asleep",
+    "scene_prompt": "Anime shot of driverless self-driving cars on a neon street slowly closing their glowing headlight 'eyes' and beginning to swerve lazily as if falling asleep, teal cyber atmosphere, no on-screen text",
+    "sfx": "whoosh",
+    "fx": null,
+    "dur": 3.0
+  },
+  {
+    "type": "dialogue",
+    "speaker": "shiro",
+    "text": "Hããã... próxima parada... ZZZ",
+    "shiro_emo": "sleepy",
+    "pico_emo": "sleepy",
+    "sfx": null,
+    "fx": null
+  },
+  {
+    "type": "scene",
+    "scene_key": "crosswalk-parent-child",
+    "scene_prompt": "Anime suspense shot of a parent with a stroller and small child at a neon-lit crosswalk at night, a sleeping driverless car drifting slowly but surely toward them, tense red glow, no on-screen text",
+    "sfx": "alarm",
+    "fx": "shake",
+    "dur": 3.0
+  },
+  {
+    "type": "scene",
+    "scene_key": "kids-rooftop-drop",
+    "scene_prompt": "Anime action shot of two small chibi hacker kids peeking over a rooftop edge then leaping off and landing softly like cats on the neon street below, teal cyber Dubai night, no on-screen text",
+    "sfx": "whoosh",
+    "fx": null,
+    "dur": 2.5
+  },
+  {
+    "type": "dialogue",
+    "speaker": "pico",
+    "text": "Uau, a cidade inteira tá dormindo! Que mancada!",
+    "shiro_emo": "normal",
+    "pico_emo": "smug",
+    "sfx": "pop",
+    "fx": null
+  },
+  {
+    "type": "dialogue",
+    "speaker": "shiro",
+    "text": "...Não tem graça. Estão todos controlados, dormindo. Temos que acordá-los.",
+    "shiro_emo": "thinking",
+    "pico_emo": "normal",
+    "sfx": null,
+    "fx": null
+  },
+  {
+    "type": "dialogue",
+    "speaker": "pico",
+    "text": "Isso é moleza~. Eu sou um hacker genial, né? Olha só!",
+    "shiro_emo": "normal",
+    "pico_emo": "smug",
+    "sfx": "pop",
+    "fx": null
+  },
+  {
+    "type": "dialogue",
+    "speaker": "pico",
+    "text": "Prontinho! Técnica: Wild Ping!",
+    "shiro_emo": "normal",
+    "pico_emo": "happy",
+    "sfx": "whoosh",
+    "fx": "flash"
+  },
+  {
+    "type": "scene",
+    "scene_key": "wild-ping-pulse",
+    "scene_prompt": "Anime action shot of a radial pulse of light bursting outward across a neon street, three nearby driverless cars snapping their headlight eyes open and braking to a stop, dynamic speed lines, teal cyber night, no on-screen text",
+    "sfx": "whoosh",
+    "fx": "flash",
+    "dur": 2.5
+  },
+  {
+    "type": "dialogue",
+    "speaker": "pico",
+    "text": "Viu? Moleza~",
+    "shiro_emo": "normal",
+    "pico_emo": "smug",
+    "sfx": null,
+    "fx": null
+  },
+  {
+    "type": "scene",
+    "scene_key": "sleep-contagion-spread",
+    "scene_prompt": "Anime shot showing a chain reaction at night: as a few driverless cars wake, neighboring cars slump and close their eyes, the sleeping spreading outward like contagion, growing number of dozing cars filling the neon street, no on-screen text",
+    "sfx": "alarm",
+    "fx": null,
+    "dur": 3.0
+  },
+  {
+    "type": "dialogue",
+    "speaker": "pico",
+    "text": "Ué?! Por que estão aumentando?! Acordo um e o do lado dorme?!",
+    "shiro_emo": "thinking",
+    "pico_emo": "panic",
+    "sfx": "alarm",
+    "fx": "shake"
+  },
+  {
+    "type": "dialogue",
+    "speaker": "pico",
+    "text": "Aaah, não vou conseguir a tempo——!",
+    "shiro_emo": "thinking",
+    "pico_emo": "panic",
+    "sfx": "shake",
+    "fx": "shake"
+  },
+  {
+    "type": "scene",
+    "scene_key": "shiro-finger-touch",
+    "scene_prompt": "Anime dramatic shot of a small hacker child silently stepping between the family and a drifting car, reaching out a single finger to touch the car's glowing forehead sensor, soft teal light, calm focus, no on-screen text",
+    "sfx": "whoosh",
+    "fx": null,
+    "dur": 3.0
+  },
+  {
+    "type": "dialogue",
+    "speaker": "shiro",
+    "text": "——Sleep Call. Vou isolar só este dos outros.",
+    "shiro_emo": "normal",
+    "pico_emo": "surprised",
+    "sfx": "chime",
+    "fx": "flash"
+  },
+  {
+    "type": "scene",
+    "scene_key": "car-isolated-safe",
+    "scene_prompt": "Anime relief shot of a single car gently coming to its senses and stopping cleanly just short of the crosswalk family, soft wind and floating particles, calm teal night, peaceful safe moment, no on-screen text",
+    "sfx": "chime",
+    "fx": null,
+    "dur": 2.5
+  },
+  {
+    "type": "dialogue",
+    "speaker": "pico",
+    "text": "C-como você fez de primeira?! Comigo só aumentou!",
+    "shiro_emo": "normal",
+    "pico_emo": "surprised",
+    "sfx": null,
+    "fx": null
+  },
+  {
+    "type": "dialogue",
+    "speaker": "shiro",
+    "text": "É porque você ficou batendo em cada um. Isolar e trazer de volta à razão——isso é EDR.",
+    "shiro_emo": "idea",
+    "pico_emo": "confused",
+    "sfx": null,
+    "fx": null
+  },
+  {
+    "type": "dialogue",
+    "speaker": "pico",
+    "text": "E... dê... erre...?",
+    "shiro_emo": "normal",
+    "pico_emo": "confused",
+    "sfx": "pop",
+    "fx": null
+  },
+  {
+    "type": "dialogue",
+    "speaker": "shiro",
+    "text": "Explico depois. ——Pico, agora é pra valer.",
+    "shiro_emo": "normal",
+    "pico_emo": "normal",
+    "sfx": null,
+    "fx": null
+  },
+  {
+    "type": "scene",
+    "scene_key": "henshin-bank",
+    "scene_prompt": "Anime transformation bank shot: two small hacker kids high-five, wrapped in a glowing teal cocoon of light particles, growing taller into heroic taller forms, dramatic henshin energy, sparkles, no on-screen text",
+    "sfx": "chime",
+    "fx": "flash",
+    "dur": 3.5
+  },
+  {
+    "type": "scene",
+    "scene_key": "henshin-pose",
+    "scene_prompt": "Anime hero landing shot: two transformed hacker heroes strike a finishing pose against the neon Dubai skyline, one in a one-finger ready stance, one crouched leaning forward, dynamic teal glow, no on-screen text",
+    "sfx": "whoosh",
+    "fx": "flash",
+    "dur": 2.5
+  },
+  {
+    "type": "scene",
+    "scene_key": "sleeping-car-horde",
+    "scene_prompt": "Anime wide shot of dozens of sleeping driverless cars sprawled across a neon avenue at night, overwhelming swarm, two heroes standing small before the huge crowd, speed lines, teal cyber atmosphere, no on-screen text",
+    "sfx": "ambient",
+    "fx": null,
+    "dur": 3.0
+  },
+  {
+    "type": "dialogue",
+    "speaker": "pico",
+    "text": "Eca, é gente demais. Vamos ter que tocar em cada um?!",
+    "shiro_emo": "normal",
+    "pico_emo": "surprised",
+    "sfx": null,
+    "fx": null
+  },
+  {
+    "type": "dialogue",
+    "speaker": "shiro",
+    "text": "Não. Um por um é igual jogo de bate-toupeira. Vamos cortar a fonte do sinal.",
+    "shiro_emo": "thinking",
+    "pico_emo": "normal",
+    "sfx": null,
+    "fx": null
+  },
+  {
+    "type": "scene",
+    "scene_key": "siem-log-convergence",
+    "scene_prompt": "Anime mystical shot of glowing lines of log data rising from all across the night city and converging into a single bright point in the air above a hero closing their eyes, teal cyber visualization, sense of total awareness, no on-screen text",
+    "sfx": "chime",
+    "fx": null,
+    "dur": 3.5
+  },
+  {
+    "type": "dialogue",
+    "speaker": "shiro",
+    "text": "Vou enxergar todos os logs espalhados de uma vez. Isso é SIEM. O centro de comando é aquele prédio velho.",
+    "shiro_emo": "idea",
+    "pico_emo": "surprised",
+    "sfx": null,
+    "fx": null
+  },
+  {
+    "type": "scene",
+    "scene_key": "c2-tower-antenna",
+    "scene_prompt": "Anime ominous shot of an old building rooftop where a tall antenna pulses with menacing red light against the teal skyline, command-and-control beacon, dark cyber atmosphere, no on-screen text",
+    "sfx": "alarm",
+    "fx": null,
+    "dur": 2.5
+  },
+  {
+    "type": "dialogue",
+    "speaker": "pico",
+    "text": "Aquela coisa vermelha é o cérebro de tudo isso?!",
+    "shiro_emo": "normal",
+    "pico_emo": "surprised",
+    "sfx": "alarm",
+    "fx": null
+  },
+  {
+    "type": "dialogue",
+    "speaker": "shiro",
+    "text": "Isso. Não bata nas pontas. Corte a cabeça. ——Vamos.",
+    "shiro_emo": "angry",
+    "pico_emo": "normal",
+    "sfx": null,
+    "fx": null
+  },
+  {
+    "type": "scene",
+    "scene_key": "pico-lure-run",
+    "scene_prompt": "Anime high-speed action shot of a hero sprinting through gaps between sleeping cars as a lure, the cars chasing into a single obedient line behind, dynamic speed lines, neon street, no on-screen text",
+    "sfx": "whoosh",
+    "fx": null,
+    "dur": 3.0
+  },
+  {
+    "type": "dialogue",
+    "speaker": "pico",
+    "text": "Por aqui, seus dorminhocos~!",
+    "shiro_emo": "normal",
+    "pico_emo": "happy",
+    "sfx": "whoosh",
+    "fx": null
+  },
+  {
+    "type": "scene",
+    "scene_key": "shiro-antenna-base",
+    "scene_prompt": "Anime tense shot of a hero reaching the base of the pulsing red C2 antenna on the rooftop, laying fingers against it, red and teal light clashing, dramatic angle, no on-screen text",
+    "sfx": "chime",
+    "fx": null,
+    "dur": 2.5
+  },
+  {
+    "type": "dialogue",
+    "speaker": "shiro",
+    "text": "——Double Wake-Up!",
+    "shiro_emo": "smug",
+    "pico_emo": "smug",
+    "sfx": "whoosh",
+    "fx": "flash"
+  },
+  {
+    "type": "scene",
+    "scene_key": "antenna-purify-wave",
+    "scene_prompt": "Anime climactic shot of the red antenna cracking and purifying into bright teal light, a shockwave ripple spreading across the whole city, all driverless cars snapping awake at once with bright eyes, triumphant, no on-screen text",
+    "sfx": "chime",
+    "fx": "flash",
+    "dur": 3.5
+  },
+  {
+    "type": "scene",
+    "scene_key": "victory-pose-skyline",
+    "scene_prompt": "Anime freeze-frame style hero shot of two heroes striking a victory pose against the restored peaceful neon Dubai night skyline, dynamic composition, glowing teal particles, no on-screen text",
+    "sfx": null,
+    "fx": "flash",
+    "dur": 2.5
+  },
+  {
+    "type": "scene",
+    "scene_key": "ghost-afterimage",
+    "scene_prompt": "Anime eerie shot of the empty antenna ruins where a faint inexplicable white heat afterimage flickers and lingers, glitchy residual data ghost, unsettling teal-and-white shimmer, no on-screen text",
+    "sfx": "ghost",
+    "fx": null,
+    "dur": 3.0
+  },
+  {
+    "type": "dialogue",
+    "speaker": "shiro",
+    "text": "...Ficou uma marca. A informação é física. Isto é——um Ghost.",
+    "shiro_emo": "surprised",
+    "pico_emo": "confused",
+    "sfx": "ghost",
+    "fx": null
+  },
+  {
+    "type": "dialogue",
+    "speaker": "pico",
+    "text": "Ghost? Um fantasma?",
+    "shiro_emo": "thinking",
+    "pico_emo": "confused",
+    "sfx": null,
+    "fx": null
+  },
+  {
+    "type": "dialogue",
+    "speaker": "shiro",
+    "text": "O fantasma dos dados. Aquilo que você acha que apagou, mas não sumiu. E começou a se mexer.",
+    "shiro_emo": "sad",
+    "pico_emo": "normal",
+    "sfx": "ghost",
+    "fx": null
+  },
+  {
+    "type": "dialogue",
+    "speaker": "pico",
+    "text": "...Sabe, eu antigamente era do lado que fazia isso, que botava todo mundo pra dormir.",
+    "shiro_emo": "normal",
+    "pico_emo": "sad",
+    "sfx": null,
+    "fx": null
+  },
+  {
+    "type": "dialogue",
+    "speaker": "shiro",
+    "text": "Vamos, Pico. Pra próxima cidade.",
+    "shiro_emo": "normal",
+    "pico_emo": "sad",
+    "sfx": "pop",
+    "fx": null
+  },
+  {
+    "type": "scene",
+    "scene_key": "ghost-silhouette-fade",
+    "scene_prompt": "Anime final cliffhanger shot of a faceless Ghost silhouette dissolving into static noise above a distant skyscraper at night, mysterious teal-and-noise atmosphere, no on-screen text",
+    "sfx": "ghost",
+    "fx": null,
+    "dur": 3.0
+  },
+  {
+    "type": "dialogue",
+    "speaker": "pico",
+    "text": "Afinal, o que era aquele tal de EDR de hoje?",
+    "shiro_emo": "normal",
+    "pico_emo": "confused",
+    "sfx": "chime",
+    "fx": null
+  },
+  {
+    "type": "dialogue",
+    "speaker": "shiro",
+    "text": "EDR = a ferramenta que vigia os aparelhos, isola os suspeitos e os traz de volta à razão.",
+    "shiro_emo": "happy",
+    "pico_emo": "normal",
+    "sfx": null,
+    "fx": null
+  },
+  {
+    "type": "dialogue",
+    "speaker": "shiro",
+    "text": "SIEM = a ferramenta que junta os logs espalhados e os relaciona. São papéis diferentes.",
+    "shiro_emo": "happy",
+    "pico_emo": "thinking",
+    "sfx": null,
+    "fx": null
+  },
+  {
+    "type": "dialogue",
+    "speaker": "pico",
+    "text": "Ou seja, eu errei a ferramenta e fiquei batendo um por um, por isso aumentou~!",
+    "shiro_emo": "happy",
+    "pico_emo": "idea",
+    "sfx": "pop",
+    "fx": null
+  },
+  {
+    "type": "dialogue",
+    "speaker": "shiro",
+    "text": "Isso mesmo. Quem quiser saber mais, é só ir ao Yukkuri Cyber ch, viu!",
+    "shiro_emo": "happy",
+    "pico_emo": "happy",
+    "sfx": "chime",
+    "fx": null
+  }
+]
