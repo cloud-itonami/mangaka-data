@@ -1,0 +1,42 @@
+;; Ghost Hacker #00『パスワードは覚えるな』 p00 — プレタイトル / 恐怖の夜
+;; scenario-first 正本 (seedance 最適化)。canonical source:
+;; mangaka-data/ghosthacker/resources/gpt-image-base-scenes/gh-arc0-1-p00/
+;; (genko.edn + page.png — 退役 Python 世代の最終成果物からの逆起こし)。
+;;
+;; seedance 最適化の要点 (p1 実測で学んだこと):
+;; - 1 shot から複数コマを別時刻で抜けるので shot 数 ≤ 5 に抑える
+;; - wide パネルに使う shot は「引き・全身・ヘッドルーム」を明示
+;;   (cover-crop の上下トリムで顔が切れた実障害の再発防止)
+;; - :generate_audio false 前提 (生成 audio の content filter 差し止め実例)
+;; - :panels は「ページのどのコマがこの shot から抜かれるか」のマッピング
+{:scene/id "gh-arc0-0-p00"
+ :scene/title "プレタイトル / 恐怖の夜"
+ :scene/style "Black-and-white Japanese manga anime style, monochrome with screentone shading, high contrast ink lines, dark horror-tinged atmosphere, cinematic lighting"
+ :scene/cast
+ [{:name "Yuto" :image "@Image1" :ref "yuto.png"}]
+ :scene/page
+ {:layout [{:id "panel-0" :size "half"}   ; 手元のスマホ・通知の奔流
+           {:id "panel-1" :size "half"}   ; 布団から目だけ・ブブッ
+           {:id "panel-2" :size "wide"}   ; ベッドで身を起こしスマホを握る
+           {:id "panel-3" :size "wide"}]} ; 無人の暗い部屋 + タイトル
+ :scene/beats
+ [{:beat/id 0 :panels [0] :panel-size "half"
+   :shot "extreme close-up, first-person view"
+   :location "a dark bedroom at night, only the phone screen glowing"
+   :action "a boy's hand holding a smartphone whose screen floods with an endless stream of arriving notification messages, the glow lighting his fingers"
+   :sfx "ブブッ"}
+  {:beat/id 1 :panels [1] :panel-size "half"
+   :shot "close-up at pillow level"
+   :location "the same dark bedroom"
+   :action "@Image1 (Yuto) hides under his blanket with only his wide frightened eyes visible above the covers, his face lit from below by the buzzing phone glow"}
+  {:beat/id 2 :panels [2] :panel-size "wide"
+   :shot "wide shot, full body visible, generous headroom"
+   :location "Yuto's small bedroom at night, bed by the window, curtains drawn"
+   :action "@Image1 (Yuto) sits up in bed clutching his phone with both hands, staring at it in dread, blanket pooled around his waist"
+   :speaker "Yuto" :register :thought
+   :line "……おれ、スニーカーを、買っただけ、なのに。"}
+  {:beat/id 3 :panels [3] :panel-size "wide"
+   :shot "static wide establishing shot, no people, generous headroom"
+   :location "the same bedroom now empty and still — desk, chair, neatly made bed, faint window light"
+   :action "an empty dark bedroom, nothing moves, an unsettling stillness"
+   :caption "Ghost Hacker #00\n『パスワードは覚えるな』"}]}

@@ -1,0 +1,49 @@
+;; Ghost Hacker #00 p05 — 購入 (正当化の階段を降りる)
+;; canonical source: v5plus/gh-arc0-1-v5plus-p05-scored.png (B2 annex から取得。
+;; でも大手っぽいロゴ / レビューもいい感じ / 来月のお小遣いでいけそう /
+;; ママのカード・・・ちょっとだけ / ・・・買おう / アキラに自慢してやる /
+;; やった！明日届く！)。タイトル『パスワードは覚えるな』への引き金となる
+;; 決定的なページ — 少年が「ちょっとだけ」を積み重ねて一線を越える。
+{:scene/id "gh-arc0-0-p05"
+ :scene/title "購入 — ちょっとだけ、の積み重ね"
+ :scene/style "Black-and-white Japanese manga anime style, monochrome with screentone shading, high contrast ink lines, tense quiet night, intimate framing"
+ :scene/cast
+ [{:name "Yuto" :image "@Image1" :ref "yuto.png"}]
+ :scene/page
+ {:layout [{:id "panel-0" :size "half"}   ; 部屋を歩き回りスマホ凝視
+           {:id "panel-1" :size "half"}   ; 目のクローズアップ(自己説得)
+           {:id "panel-2" :size "wide"}   ; 廊下・母のバッグから財布
+           {:id "panel-3" :size "half"}   ; 決意の顔「・・・買おう」
+           {:id "panel-4" :size "half"}]} ; ベッドで火照る「やった！明日届く！」
+ :scene/beats
+ [{:beat/id 0 :panels [0] :panel-size "half"
+   :shot "medium shot tracking slowly"
+   :location "Yuto's bedroom at night, desk lamp on"
+   :action "@Image1 (Yuto) paces his small room staring at his phone, scrolling a shop page restlessly"
+   :speaker "Yuto" :register :thought
+   :line "でも、大手っぽいロゴ・・・レビューも、いい感じ・・・"}
+  {:beat/id 1 :panels [1] :panel-size "half"
+   :shot "extreme close-up on the eyes"
+   :location "the lamplit room"
+   :action "@Image1 (Yuto)'s eyes narrow with self-persuasion, the phone glow flickering across them"
+   :speaker "Yuto" :register :thought
+   :line "来月のお小遣いで、いけそうだし、、"}
+  {:beat/id 2 :panels [2] :panel-size "wide"
+   :shot "wide shot down a dark hallway, generous headroom"
+   :location "the family home's dark hallway at night, a handbag on the sideboard"
+   :action "@Image1 (Yuto) tiptoes to his mother's handbag on the sideboard and slides out a credit card, glancing over his shoulder"
+   :speaker "Yuto" :register :thought
+   :line "ママのカード・・・ちょっとだけ・・・"}
+  {:beat/id 3 :panels [3] :panel-size "half"
+   :shot "close-up, straight on"
+   :location "back in his room, phone in hand"
+   :action "@Image1 (Yuto) exhales and taps the BUY button with a trembling thumb, face set with resolve"
+   :speaker "Yuto" :register :speech
+   :line "・・・買おう"
+   :sfx "ピ"}
+  {:beat/id 4 :panels [4] :panel-size "half"
+   :shot "medium shot from above the bed"
+   :location "his bedroom, lights off, phone glowing on the pillow"
+   :action "@Image1 (Yuto) flops back onto his bed hugging the phone, grinning with giddy excitement, feet kicking"
+   :speaker "Yuto" :register :speech :expression "Happy"
+   :line "やった！明日、届く！アキラに、自慢、してやる・・・"}]}

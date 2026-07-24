@@ -1,0 +1,50 @@
+;; Ghost Hacker #00 p02 — 教室のスニーカー自慢 (数日前・昼)
+;; canonical source: 公開済み gh-published/p02.png (Akira の 128 パーカー・
+;; 定価2万5千→転売5万・Holonium Vision 限定・100万の噂・ピッ)。
+;; 時系列はここから p05 まで回想 (p00-p01 の「あの夜」に至る経緯)。
+{:scene/id "gh-arc0-0-p02"
+ :scene/title "アキラの自慢 — 限定スニーカー"
+ :scene/style "Black-and-white Japanese manga anime style, monochrome with screentone shading, high contrast ink lines, bright daytime classroom"
+ :scene/cast
+ [{:name "Yuto" :image "@Image1" :ref "yuto.png"}
+  {:name "Nei" :image "@Image2" :ref "nei.png"}
+  {:name "Ren" :image "@Image3" :ref "ren.png"}
+  {:name "Akira" :image "@Image4" :ref "akira.png"}]
+ :scene/page
+ {:layout [{:id "panel-0" :size "half"}   ; Akira ドヤ顔で自慢
+           {:id "panel-1" :size "half"}   ; Nei 冷静に相場ツッコミ
+           {:id "panel-2" :size "half"}   ; Yuto 羨望
+           {:id "panel-3" :size "half"}   ; Ren 無関心
+           {:id "panel-4" :size "wide"}]} ; 教室ワイド・100万の噂・ピッ
+ :scene/beats
+ [{:beat/id 0 :panels [0] :panel-size "half"
+   :shot "medium close-up in front of the blackboard"
+   :location "a bright school classroom in the morning, blackboard behind"
+   :action "@Image4 (Akira) grins triumphantly in front of the blackboard, showing off a boxed limited-edition sneaker to gathered classmates"
+   :speaker "Akira" :register :shout :expression "Happy"
+   :line "限定モデル、当てたんだよ"}
+  {:beat/id 1 :panels [1] :panel-size "half"
+   :shot "medium shot by the classroom shelves"
+   :location "the same classroom"
+   :action "@Image2 (Nei) stands with arms crossed near the shelves, unimpressed, giving a flat sideways look"
+   :speaker "Nei" :register :speech :expression "Neutral"
+   :line "定価2万5千？転売だと5万超えてた"}
+  {:beat/id 2 :panels [2] :panel-size "half"
+   :shot "medium shot from across the desks"
+   :location "the same classroom, window light"
+   :action "@Image1 (Yuto) sits at his desk gazing toward the crowd with open envy, hands gripping his knees"
+   :speaker "Yuto" :register :thought :expression "Anxious"
+   :line "いいなぁ・・・おれも、欲しい"}
+  {:beat/id 3 :panels [3] :panel-size "half"
+   :shot "medium shot at a window seat"
+   :location "the same classroom, back row"
+   :action "@Image3 (Ren) slouches at a window seat with his chin on his hand, eyes half closed, utterly uninterested"
+   :speaker "Ren" :register :speech :expression "Smirk"
+   :line "え、いや、まあ・・・カッコいいんじゃね"}
+  {:beat/id 4 :panels [4] :panel-size "wide"
+   :shot "wide shot of the whole classroom, generous headroom"
+   :location "the same classroom seen from the back"
+   :action "the classroom buzzes, students clustered around Akira's desk, phones out taking pictures of the sneaker"
+   :speaker nil :register :chatter :expression "Surprised"
+   :line "抽選外れても転売で100万って噂"
+   :sfx "ピッ"}]}

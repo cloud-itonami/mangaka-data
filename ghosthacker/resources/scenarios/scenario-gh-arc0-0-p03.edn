@@ -1,0 +1,47 @@
+;; Ghost Hacker #00 p03 — 路地の聞き込み (夕暮れの商店街裏)
+;; canonical source: 公開済み gh-published/p03.png (フードの Ren・自販機の路地・
+;; ヘッドフォンの少女 (Saki) の観察報告「15秒、机の端を、指で触ってた」)。
+;; 誰かが Ren のことを嗅ぎ回っている、という不穏の種を撒くページ。
+{:scene/id "gh-arc0-0-p03"
+ :scene/title "聞き込み — 3年B組の藤崎くん"
+ :scene/style "Black-and-white Japanese manga anime style, monochrome with heavy screentone shading, high contrast ink lines, moody back-alley dusk, dense urban detail"
+ :scene/cast
+ [{:name "Ren" :image "@Image1" :ref "ren.png"}
+  {:name "Saki" :image "@Image2" :ref "saki.png"}]
+ :scene/page
+ {:layout [{:id "panel-0" :size "half"}   ; フードの Ren 振り向く「ん」
+           {:id "panel-1" :size "half"}   ; 自販機の路地・Saki「レン」
+           {:id "panel-2" :size "half"}   ; Ren 自転車で去る「知らん」
+           {:id "panel-3" :size "half"}   ; Saki 壁際「3年B組の、藤崎くん」
+           {:id "panel-4" :size "wide"}]} ; 路地ワイド「15秒、机の端を、指で触ってた」
+ :scene/beats
+ [{:beat/id 0 :panels [0] :panel-size "half"
+   :shot "medium close-up in a doorway"
+   :location "a narrow back alley at dusk, old wooden walls, a lit sign"
+   :action "@Image1 (Ren) in a dark hooded jacket pauses in a doorway and glances back over his shoulder, wary"
+   :speaker "Ren" :register :speech
+   :line "ん"}
+  {:beat/id 1 :panels [1] :panel-size "half"
+   :shot "medium wide shot beside vending machines"
+   :location "the same alley lined with glowing vending machines"
+   :action "@Image2 (Saki) wearing headphones stands calmly beside a vending machine, facing him, notebook in hand"
+   :speaker "Saki" :register :speech
+   :line "レン。3年B組の、藤崎くん"}
+  {:beat/id 2 :panels [2] :panel-size "half"
+   :shot "medium shot, panning with a bicycle"
+   :location "the alley opening onto a sloped residential street"
+   :action "@Image1 (Ren) pushes off on his bicycle without looking back, hood up, one hand on the handlebar"
+   :speaker "Ren" :register :speech :expression "Smirk"
+   :line "知らん"}
+  {:beat/id 3 :panels [3] :panel-size "half"
+   :shot "medium shot against a wall"
+   :location "the alley wall plastered with old posters, dusk shadows"
+   :action "@Image2 (Saki) leans against the wall unbothered, watching him go, tapping her notebook"
+   :speaker "Saki" :register :monologue
+   :line "嘘。目が泳いだ"}
+  {:beat/id 4 :panels [4] :panel-size "wide"
+   :shot "wide shot down the alley, generous headroom"
+   :location "the long narrow alley, vending machine glow, telephone poles and cables overhead"
+   :action "@Image2 (Saki) walks slowly down the middle of the empty alley alone, headphones on, reviewing her notes"
+   :speaker "Saki" :register :monologue
+   :line "あの時、15秒、机の端を、指で触ってた"}]}

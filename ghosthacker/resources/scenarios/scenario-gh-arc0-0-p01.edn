@@ -1,0 +1,41 @@
+;; Ghost Hacker #00 p01 — フックモンタージュ (4視点の同時多発)
+;; canonical source: 公開済み v11-p01 (gh-published/v11-p01.png) +
+;; ai-gftd-mangaka mangaka.seed/sample-page (gh-arc0-1-p1 storyboard)。
+;; scenario-first workflow の初回実証 (scenario-gh-arc0-1-p1.edn) の改訂版 —
+;; 公開版の絵柄 (Yuto は就寝中 / Nei は窓辺 / 無数の画面の暗室 / 無人の教室)
+;; に整合させた。
+{:scene/id "gh-arc0-0-p01"
+ :scene/title "フックモンタージュ — 同じ夜、それぞれの部屋"
+ :scene/style "Black-and-white Japanese manga anime style, monochrome with screentone shading, high contrast ink lines, cinematic lighting"
+ :scene/cast
+ [{:name "Yuto" :image "@Image1" :ref "yuto.png"}
+  {:name "Nei" :image "@Image2" :ref "nei.png"}]
+ :scene/page
+ {:layout [{:id "panel-0" :size "wide"}   ; Yuto 就寝・つぶやき
+           {:id "panel-1" :size "half"}   ; Nei 窓辺 起動した…
+           {:id "panel-2" :size "half"}   ; 無数のモニタの暗室 気づいてる？
+           {:id "panel-3" :size "wide"}]} ; 無人の暗い教室 ドォン
+ :scene/beats
+ [{:beat/id 0 :panels [0] :panel-size "wide"
+   :shot "wide shot from the foot of the bed, generous headroom"
+   :location "Yuto's bedroom late at night, dim moonlight"
+   :action "@Image1 (Yuto) lies asleep in his bed, face half-buried in the pillow, one arm hanging off the mattress, a phone glowing faintly on the nightstand"
+   :speaker "Yuto" :register :thought
+   :line "…おれ、買っただけ、なのに、"}
+  {:beat/id 1 :panels [1] :panel-size "half"
+   :shot "close-up through a window frame"
+   :location "Nei's room at night, city lights outside"
+   :action "@Image2 (Nei) leans by her window holding her phone, a small knowing smile forming as she reads the screen"
+   :speaker "Nei" :register :speech
+   :line "起動した…"}
+  {:beat/id 2 :panels [2] :panel-size "half"
+   :shot "wide interior shot, no visible faces"
+   :location "a pitch-dark room walled with dozens of glowing computer monitors of different sizes"
+   :action "a wall of mismatched screens flickers in the darkness, silhouettes of cables and racks, one silhouette hunched before them"
+   :speaker nil :register :whisper
+   :line "気づいてる？"}
+  {:beat/id 3 :panels [3] :panel-size "wide"
+   :shot "static wide shot, low angle across desks, generous headroom"
+   :location "an empty school classroom at night, moonlight through tall windows"
+   :action "rows of empty desks in a dark classroom; at the far back seat a barely-visible shadowy figure with faintly glowing eyes sits motionless"
+   :sfx "ドォン"}]}

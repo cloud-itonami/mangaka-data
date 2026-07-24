@@ -1,0 +1,37 @@
+;; Ghost Hacker #00 p04 — 夜の物色 (Yuto、転売サイトを見つめる)
+;; canonical source: 公開済み gh-published/p04.png (5万・・・高い /
+;; でも、アキラだけ、ズルい / 時間限定、マジか / 雑多なモニタ部屋)。
+{:scene/id "gh-arc0-0-p04"
+ :scene/title "夜の物色 — 5万は高い、でも"
+ :scene/style "Black-and-white Japanese manga anime style, monochrome with screentone shading, high contrast ink lines, dark room lit only by screens, oppressive night mood"
+ :scene/cast
+ [{:name "Yuto" :image "@Image1" :ref "yuto.png"}]
+ :scene/page
+ {:layout [{:id "panel-0" :size "half"}   ; ラップトップの灯りに照らされる顔
+           {:id "panel-1" :size "half"}   ; 部屋ワイド(背中越し)
+           {:id "panel-2" :size "wide"}   ; モニタ群のクローズアップ(商品ページ)
+           {:id "panel-3" :size "wide"}]} ; 顔の影・時間限定の焦り
+ :scene/beats
+ [{:beat/id 0 :panels [0] :panel-size "half"
+   :shot "close-up across the laptop lid"
+   :location "Yuto's dark bedroom at night, desk lamp off, laptop glow only"
+   :action "@Image1 (Yuto) stares at his laptop screen, face lit cold blue-white, biting his lip"
+   :speaker "Yuto" :register :thought
+   :line "5万・・・・・・高い"}
+  {:beat/id 1 :panels [1] :panel-size "half"
+   :shot "wide shot from behind, generous headroom"
+   :location "the same room seen from the doorway, walls covered with posters and clutter"
+   :action "@Image1 (Yuto) hunches small before the glowing laptop in the dark room, seen from behind"
+   :speaker "Yuto" :register :thought
+   :line "でも、アキラだけ、ズルい・・・"}
+  {:beat/id 2 :panels [2] :panel-size "wide"
+   :shot "close-up of the screen, no people"
+   :location "the laptop screen filling the frame"
+   :action "a shopping site page shows a limited-edition sneaker photo with a large countdown timer and a BUY button, cursor hovering"
+   :sfx "ピッ"}
+  {:beat/id 3 :panels [3] :panel-size "wide"
+   :shot "low-angle close-up, face half in shadow, headroom kept"
+   :location "the dark room, screen glow from below"
+   :action "@Image1 (Yuto) leans forward, eyes wide, the countdown reflected in his eyes, half his face swallowed by shadow"
+   :speaker "Yuto" :register :thought
+   :line "時間限定、マジか・・・"}]}
