@@ -19,6 +19,7 @@ datalad get -d ~/gftdcojp/mangaka-ghosthacker-assets style-experiments   # git-a
 ipfs get bafybeigwdw4oetm24hlxhmggh2q7lfh37e3jzc5rs5q7jhbo4x5a6f5edu     # IPFS pin
 ```
 
-`style-experiments/` is git-ignored here (see `60-apps/ai-gftd-project-mangaka/.gitignore`)
-so new binaries route to DataLad, not git.
+`style-experiments/` belongs to the DataLad asset store; generated application
+artifacts belong under `orgs/gftdcojp/mangaka-data`, not a legacy `60-apps`
+working tree.
 "}
