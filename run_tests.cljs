@@ -1,0 +1,30 @@
+#!/usr/bin/env nbb
+;; run_tests.cljs — mangaka-data corpus の検査。
+;;
+;;   nbb --classpath test run_tests.cljs
+;;
+;; この repo は 2026-07 の分離以来、**検査を 1 本も持っていなかった**。コードが
+;; 無いので「テストする対象が無い」ように見えるが、実際には 297 の文書が互いを
+;; 参照しており（scenario → character ref、beat → panel、genre → style profile、
+;; 言語版 → 共有のカット割り）、その参照はどれも壊れても何も throw しない。
+;; 壊れたまま render パイプラインへ渡り、生成物になって初めて分かる。
+;;
+;; workspace の規則（superproject CLAUDE.md）で script host は nbb に一本化されて
+;; おり、新規の .sh / .mjs は禁止。よって runner は nbb + cljs.test である。
+(ns run-tests
+  (:require [clojure.test :as t]
+            [mangaka-data.corpus-test]))
+
+(def green-marker
+  "scripts/maturity-loop/mutations.edn の `:green-marker`。全部緑のときだけ出す ——
+   出力に現れるかどうかで mutation が噛んだかを判定するので、緑でないときに
+   印字してはならない。"
+  "mangaka-data corpus: all green")
+
+(defmethod t/report [:cljs.test/default :end-run-tests] [m]
+  (if (t/successful? m)
+    (println (str "\n" green-marker))
+    (do (println "\nmangaka-data corpus: FAILED")
+        (js/process.exit 1))))
+
+(t/run-tests 'mangaka-data.corpus-test)
