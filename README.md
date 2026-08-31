@@ -18,6 +18,9 @@ annex 側は superproject の `manifest/west_annex.cljs` が担う。）
 - `osamu/` — 手塚系 story .md.edn 台帳
 - `originals/`, `style-registry.edn`, `recipe-ledger.jsonl`
 
+運用手順（取得 → 検査 → annex → consumer 確認、赤いときの読み分け）は
+`docs/operator-quickstart.md`。以下はその要約。
+
 検査: `nbb --classpath test run_tests.cljs`（**annex の実体は要らない** —— 参照が
 dataset に宣言されているかだけを見る）。文書が EDN / JSON として読めることに加え、
 scenario → character ref / beat → panel / genre → style profile / 言語版 → 共有の
