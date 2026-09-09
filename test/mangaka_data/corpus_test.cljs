@@ -30,7 +30,7 @@
 (ns mangaka-data.corpus-test
   (:require [clojure.test :refer [deftest is testing]]
             [clojure.edn :as edn]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             ["fs" :as fs]
             ["path" :as path]
             ["child_process" :as cp]))
