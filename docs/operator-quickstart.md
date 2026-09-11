@@ -2,7 +2,7 @@
 
 **この dataset にはコードが無い。** 動かすものが無いので「動いているか」は
 `起動する / 応答する` では測れない。測れるのは **文書どうしの参照が閉じているか**
-だけで、それを見るのが `run_tests.cljs` である。
+だけで、それを見るのが `run_tests.cljk` である。
 
 この文書は、その 1 本の検査を軸にした運用手順書である。書いてある手順は
 **すべて実際に踏んで出力を確認した**（2026-09-01、pin `86f61060`）。数値は
@@ -56,7 +56,7 @@ grep -A5 'name: cloud-itonami-mangaka-data' manifest/west.yml
 
 ```bash
 cd orgs/cloud-itonami/mangaka-data
-nbb --classpath test run_tests.cljs
+nbb --classpath test run_tests.cljk
 ```
 
 緑のときの最後の 1 行は決め打ちされている:
@@ -68,7 +68,7 @@ Ran 9 tests containing 17 assertions.
 mangaka-data corpus: all green
 ```
 
-**この最終行は飾りではない。** `run_tests.cljs` は緑のときだけこれを印字し、
+**この最終行は飾りではない。** `run_tests.cljk` は緑のときだけこれを印字し、
 赤のときは印字せずに exit 1 する。上流（`scripts/maturity-loop/mutations.edn`）は
 この行の有無で「検査が噛んだか」を判定するので、**文言を変えるときは
 mutations.edn も一緒に直す**。
@@ -78,7 +78,7 @@ mutations.edn も一緒に直す**。
 検査は `process.cwd()` を dataset のルートとみなす。サブディレクトリから
 
 ```bash
-cd osamu && nbb --classpath ../test ../run_tests.cljs
+cd osamu && nbb --classpath ../test ../run_tests.cljk
 ```
 
 と叩くと **exit 1 / 6 failures + 1 error** になる。これは壊れているのではなく、
@@ -265,6 +265,6 @@ node -e 'const g=JSON.parse(require("fs").readFileSync("ghosthacker/resources/as
 - `README.md` — dataset の輪郭と consumer
 - `MIGRATION.edn` — `ai-gftd-apps-gftdcojp` からの回収記録（`:annex-content-unavailable 44`
   は §4 の 44 件と同じもの）
-- `test/mangaka_data/corpus_test.cljs` — 各検査が何を守っているかは docstring が持つ
+- `test/mangaka_data/corpus_test.cljk` — 各検査が何を守っているかは docstring が持つ
 - superproject `manifest/west_annex.cljs` — annex 側の実装。`west annex-get` という
   west 拡張は**無い**
