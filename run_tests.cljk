@@ -1,7 +1,7 @@
 #!/usr/bin/env nbb
-;; run_tests.cljs — mangaka-data corpus の検査。
+;; run_tests.cljk — mangaka-data corpus の検査。
 ;;
-;;   nbb --classpath test run_tests.cljs
+;;   nbb --classpath test run_tests.cljk
 ;;
 ;; この repo は 2026-07 の分離以来、**検査を 1 本も持っていなかった**。コードが
 ;; 無いので「テストする対象が無い」ように見えるが、実際には 297 の文書が互いを
