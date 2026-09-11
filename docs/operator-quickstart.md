@@ -56,7 +56,7 @@ grep -A5 'name: cloud-itonami-mangaka-data' manifest/west.yml
 
 ```bash
 cd orgs/cloud-itonami/mangaka-data
-nbb --classpath test run_tests.cljk
+kbb --backend sci --classpath test run_tests.cljk
 ```
 
 緑のときの最後の 1 行は決め打ちされている:
@@ -78,7 +78,7 @@ mutations.edn も一緒に直す**。
 検査は `process.cwd()` を dataset のルートとみなす。サブディレクトリから
 
 ```bash
-cd osamu && nbb --classpath ../test ../run_tests.cljk
+cd osamu && kbb --backend sci --classpath ../test ../run_tests.cljk
 ```
 
 と叩くと **exit 1 / 6 failures + 1 error** になる。これは壊れているのではなく、
@@ -153,7 +153,7 @@ git annex info b2
 
 ```bash
 # superproject のルートで。B2 credential は scripts/b2-creds.cljs が解決する
-nbb manifest/west_annex.cljs annex-get cloud-itonami-mangaka-data
+kbb --backend sci manifest/west_annex.cljk annex-get cloud-itonami-mangaka-data
 ```
 
 実測（44 件・54 MB、所要は回線次第）:
@@ -256,7 +256,7 @@ node -e 'const g=JSON.parse(require("fs").readFileSync("ghosthacker/resources/as
 4. 着地は server side merge（`gh api repos/cloud-itonami/mangaka-data/merges`）。
    rebase も force-push もしない。
 5. superproject 側の pin を進めるのは **当該 entry だけ**
-   （`nbb scripts/gen-west-manifest.cljs --entry cloud-itonami-mangaka-data`）。
+   （`kbb --backend sci scripts/gen-west-manifest.cljk --entry cloud-itonami-mangaka-data`）。
 
 ---
 
