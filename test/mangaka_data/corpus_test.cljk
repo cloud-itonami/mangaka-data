@@ -28,7 +28,7 @@
 ;; 使うと **custody の話（`west annex-get`）を参照整合性の違反として報告する**
 ;; ことになり、既定で常に赤い検査ができあがる。
 (ns mangaka-data.corpus-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [kotoba.lang.edn :as edn]
             [kotoba.lang.text :as str]
             ["fs" :as fs]
