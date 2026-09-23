@@ -29,7 +29,7 @@
 ;; ことになり、既定で常に赤い検査ができあがる。
 (ns mangaka-data.corpus-test
   (:require [clojure.test :refer [deftest is testing]]
-            [clojure.edn :as edn]
+            [kotoba.lang.edn :as edn]
             [kotoba.lang.text :as str]
             ["fs" :as fs]
             ["path" :as path]
