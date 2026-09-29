@@ -9,7 +9,7 @@
 ;; 言語版 → 共有のカット割り）、その参照はどれも壊れても何も throw しない。
 ;; 壊れたまま render パイプラインへ渡り、生成物になって初めて分かる。
 ;;
-;; workspace の規則（superproject CLAUDE.md）で script host は nbb に一本化されて
+;; workspace の規則（superproject AGENTS.md）で script host は nbb に一本化されて
 ;; おり、新規の .sh / .mjs は禁止。よって runner は nbb + cljs.test である。
 (ns run-tests
   (:require [kotoba.test :as t]
